@@ -334,8 +334,9 @@ public class RecetasService implements IRecetasService {
 		receta.setPara(rs.getString("para"));
 		receta.setFechaCreacion(rs.getDate("fecha_creacion"));
 		receta.setTiempoTotal(rs.getInt("tiempo_total"));
-		receta.setTiempoThermomix(rs.getInt("tiempo_thermomix"));
-		receta.setCategoria(rs.getString("categoria"));
+		//TODO ESTO FALLA: En la lista hay que enviarle dos objetos y en el ejemplo de fran envia un entero y un string.
+		//receta.setTiempoThermomix(rs.getInt("tiempo_thermomix"));
+		//receta.setCategoria(rs.getString("categoria"));
 		return receta;
 	}
 	

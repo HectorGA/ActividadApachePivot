@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:VentanaPrincipalWindow title="RecetApp"
+	maximized="true" xmlns:bxml="http://pivot.apache.org/bxml"
+	xmlns:content="org.apache.pivot.wtk.content" xmlns:ui="dad.recetapp.ui"
+	xmlns="org.apache.pivot.wtk">
+	
+	<bxml:define>
+		<Prompt bxml:id="confirmCloseTabPrompt" title="Confirm Close Tab"
+			message="Really close this tab?" options="['Cancel', 'OK']"
+			selectedOptionIndex="1" />
+	</bxml:define>
+
+	<BoxPane orientation="vertical" styles="{padding:5, fill:true}">
+		<TabPane bxml:id="tabPane">
+			
+			<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+				<TabPane.tabData>
+					<content:ButtonData text="Recetas" />
+				</TabPane.tabData>
+				<Border styles="{padding:2}">
+					
+				</Border>
+			</BoxPane>
+			
+			<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+				<TabPane.tabData>
+					<content:ButtonData text="Categorías" />
+				</TabPane.tabData>
+				<Border styles="{padding:2}">
+					<Label text="480x360" preferredWidth="480" preferredHeight="360" styles="{horizontalAlignment:'center', verticalAlignment:'center'}" />
+					<bxml:include src="categorias.bxml"/>
+				</Border>
+			</BoxPane>
+
+			<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+				<TabPane.tabData>
+					<content:ButtonData text="Ingredientes" />
+				</TabPane.tabData>
+				<Border styles="{padding:2}">
+					<Label text="480x360" preferredWidth="480" preferredHeight="360" styles="{horizontalAlignment:'center', verticalAlignment:'center'}" />
+					<bxml:include src="ingredientes.bxml"/>
+				</Border>
+			</BoxPane>
+
+			<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+				<TabPane.tabData>
+					<content:ButtonData text="Medidas" />
+				</TabPane.tabData>
+				<Border styles="{padding:2}">
+					<bxml:include src="medidas.bxml"/>
+				</Border>
+			</BoxPane>
+						
+			<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+				<TabPane.tabData>
+					<content:ButtonData text="Anotaciones" />
+				</TabPane.tabData>
+				<Border styles="{padding:2}">
+					<bxml:include src="anotaciones.bxml"/>
+				</Border>
+			</BoxPane>
+		</TabPane>
+	</BoxPane>
+			
+	<BoxPane>
+		<Label text="Recetas:" styles="{verticalAlignment:'center'}" />
+	</BoxPane>
+
+</ui:VentanaPrincipalWindow>

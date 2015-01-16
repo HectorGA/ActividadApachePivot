@@ -4,6 +4,8 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import org.apache.pivot.wtk.DesktopApplicationContext;
+
 import dad.recetapp.db.DataBase;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
@@ -25,6 +27,8 @@ public class Main {
 			String mensajeRerror = e.getMessage() + "\n\nDetalles: " + e.getCause().getMessage();
 			JOptionPane.showMessageDialog(null, mensajeRerror, "Error", JOptionPane.ERROR_MESSAGE);
 		}
+		
+		DesktopApplicationContext.main(RecetAppApplication.class, args);
 	}
 
 }
