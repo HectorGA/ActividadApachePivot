@@ -14,11 +14,14 @@ import dad.recetapp.services.items.CategoriaItem;
 public class Main {
 
 	public static void main(String[] args) throws SQLException{
-		/*Aun no ejecuta nada, solo hace una prueba de la base de datos.*/
+		/*Se hace una prueba de la base de datos.*/
 		System.out.println("Prueba de conexión: " + DataBase.test());
 		
 		//	Probamos los servicios
-		CategoriaItem categoria = new CategoriaItem();
+		
+		/* EJEMPLO DE CREAR UNA NUEVA CATEGORIA CON EL SERVICIO
+		 * crearCategoria.*/
+		/*CategoriaItem categoria = new CategoriaItem();
 		categoria.setDescripcion("Pastas");
 		
 		try {
@@ -26,7 +29,7 @@ public class Main {
 		} catch (ServiceException e) {
 			String mensajeRerror = e.getMessage() + "\n\nDetalles: " + e.getCause().getMessage();
 			JOptionPane.showMessageDialog(null, mensajeRerror, "Error", JOptionPane.ERROR_MESSAGE);
-		}
+		}*/
 		
 		DesktopApplicationContext.main(RecetAppApplication.class, args);
 	}

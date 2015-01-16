@@ -67,7 +67,6 @@ public class CategoriasService implements ICategoriasService {
 	@Override
 	public void eliminarCategoria(Long id) throws ServiceException {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override

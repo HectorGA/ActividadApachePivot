@@ -24,15 +24,15 @@
 				</TablePane.Row>
 
 				<TablePane.Row>
-					<Label text="Nota" styles="{verticalAlignment:'center'}" />
+					<Label text="Carnes" styles="{verticalAlignment:'center', horizontalAlignment:'left'}" />
 				</TablePane.Row>
 
 				<TablePane.Row>
-					<Label text="Sugerencia" styles="{verticalAlignment:'center'}" />
+					<Label text="Caldos" styles="{verticalAlignment:'center', horizontalAlignment:'left'}" />
 				</TablePane.Row>
 
 				<TablePane.Row>
-					<Label text="Comentario" styles="{verticalAlignment:'center'}" />
+					<Label text="" styles="{verticalAlignment:'center', horizontalAlignment:'left'}" />
 				</TablePane.Row>
 			</TablePane>
 		</Border>
