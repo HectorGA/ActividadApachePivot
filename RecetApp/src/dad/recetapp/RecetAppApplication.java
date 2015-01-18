@@ -32,8 +32,9 @@ public class RecetAppApplication implements Application{
 		// Cambiamos la ruta para que en vez de usar recetappapachepivot use solo recetapp.
 		ventanaPrincipalWindow = (VentanaPrincipalWindow) loadWindow("dad/recetapp/ui/VentanaPrincipalWindow.bxml");
 		ventanaPrincipalWindow.open(display);
+
 	}
-	
+
 	public static Window loadWindow(String bxmlFile) throws IOException, SerializationException {
 		URL bxmlUrl = RecetAppApplication.class.getClassLoader().getResource(bxmlFile);
 		BXMLSerializer serializer = new BXMLSerializer();

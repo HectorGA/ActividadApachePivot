@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:RecetAppWindow title="Hola Mundo" maximized="true" 
-	xmlns:ui="dad.recetappapachepivot.ui"
+	xmlns:ui="dad.recetapp.ui"
 	xmlns:bxml="http://pivot.apache.org/bxml"
 	xmlns:content="org.apache.pivot.wtk.content"
 	xmlns="org.apache.pivot.wtk">

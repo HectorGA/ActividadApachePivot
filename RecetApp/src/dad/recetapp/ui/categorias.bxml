@@ -2,39 +2,27 @@
 
 	<BoxPane orientation="vertical"
 	xmlns:bxml="http://pivot.apache.org/bxml"
-	xmlns:content="org.apache.pivot.wtk.content" xmlns:ui="dad.recetappapachepivot.ui"
+	xmlns:content="org.apache.pivot.wtk.content" xmlns:ui="dad.recetapp.ui"
 	xmlns="org.apache.pivot.wtk">
 		<FlowPane>
 			<Label text="Descripción:"
 				styles="{horizontalAlignment:'center', verticalAlignment:'center'}" />
-			<TextInput></TextInput>
-			<PushButton buttonData="Añadir" />
-			<PushButton buttonData="Eliminar" />
+			<TextInput bxml:id="descripcionText"></TextInput>
+			<PushButton bxml:id="botonAnadir" buttonData="Añadir" />
+			<PushButton bxml:id="botonEliminar" buttonData="Eliminar" />
 		</FlowPane>
 		<Border>
-			<TablePane bxml:id="tablePane"
-				styles="{verticalSpacing:1, showHorizontalGridLines:true,
-            horizontalSpacing:1, showVerticalGridLines:true}">
-				<columns>
-					<TablePane.Column width="300" />
-				</columns>
-
-				<TablePane.Row>
-					<Label text="Descripción" styles="{horizontalAlignment:'center'}" />
-				</TablePane.Row>
-
-				<TablePane.Row>
-					<Label text="Carnes" styles="{verticalAlignment:'center', horizontalAlignment:'left'}" />
-				</TablePane.Row>
-
-				<TablePane.Row>
-					<Label text="Caldos" styles="{verticalAlignment:'center', horizontalAlignment:'left'}" />
-				</TablePane.Row>
-
-				<TablePane.Row>
-					<Label text="" styles="{verticalAlignment:'center', horizontalAlignment:'left'}" />
-				</TablePane.Row>
-			</TablePane>
+			<ScrollPane horizontalScrollBarPolicy="fill_to_capacity">
+                <TableView bxml:id="tableView" styles="{includeTrailingVerticalGridLine:true}">
+                    <columns>
+                        <TableView.Column name="descripcion" width="180"
+                        headerData="Descripción" />
+                    </columns>
+                </TableView>
+                <columnHeader>
+                    <TableViewHeader tableView="$tableView" sortMode="single_column"
+                        styles="{includeTrailingVerticalGridLine:true}"/>
+                </columnHeader>
+            </ScrollPane>
 		</Border>
-
 	</BoxPane>

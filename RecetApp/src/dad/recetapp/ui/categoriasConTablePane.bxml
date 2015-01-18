@@ -13,26 +13,13 @@
 		</FlowPane>
 		<Border>
 			<TablePane bxml:id="tablePane"
-				styles="{verticalSpacing:1, showHorizontalGridLines:true,
-            horizontalSpacing:1, showVerticalGridLines:true}">
+				styles="{verticalSpacing:1, showHorizontalGridLines:true, horizontalSpacing:1, showVerticalGridLines:true}">
 				<columns>
 					<TablePane.Column width="300" />
 				</columns>
 
 				<TablePane.Row>
 					<Label text="Descripción" styles="{horizontalAlignment:'center'}" />
-				</TablePane.Row>
-
-				<TablePane.Row>
-					<Label text="Nota" styles="{verticalAlignment:'center'}" />
-				</TablePane.Row>
-
-				<TablePane.Row>
-					<Label text="Sugerencia" styles="{verticalAlignment:'center'}" />
-				</TablePane.Row>
-
-				<TablePane.Row>
-					<Label text="Comentario" styles="{verticalAlignment:'center'}" />
 				</TablePane.Row>
 			</TablePane>
 		</Border>
