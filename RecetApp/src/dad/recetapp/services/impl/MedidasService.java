@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dad.recetapp.db.DataBase;
-import dad.recetapp.services.ICategoriasService;
 import dad.recetapp.services.IMedidasService;
 import dad.recetapp.services.ServiceException;
-import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.MedidaItem;
 
 public class MedidasService implements IMedidasService{
@@ -74,7 +72,7 @@ public class MedidasService implements IMedidasService{
 		MedidaItem medida = null;
 		try {
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("select id,descripcion from categorias");
+			PreparedStatement statement = conn.prepareStatement("select id,nombre,abreviatura from categorias");
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				medida = new MedidaItem();

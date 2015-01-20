@@ -17,8 +17,7 @@
 				<TabPane.tabData>
 					<content:ButtonData text="Recetas" />
 				</TabPane.tabData>
-				<Border styles="{padding:2}">
-					
+				<Border styles="{padding:2}">	
 				</Border>
 			</BoxPane>
 			
@@ -28,13 +27,14 @@
 				</TabPane.tabData>
 				<Border styles="{padding:2}">
 					<Label text="480x360" preferredWidth="480" preferredHeight="360" styles="{horizontalAlignment:'center', verticalAlignment:'center'}" />
-					<bxml:include src="categorias.bxml"/>
+					
+					<bxml:include bxml:id="CategoriaPane" src="categorias.bxml"/>
 				</Border>
 			</BoxPane>
 
 			<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
-				<TabPane.tabData>
-					<content:ButtonData text="Ingredientes" />
+				<TabPane.tabData>					
+					<content:ButtonData bxml:id="IngredientePane" text="Ingredientes" />
 				</TabPane.tabData>
 				<Border styles="{padding:2}">
 					<Label text="480x360" preferredWidth="480" preferredHeight="360" styles="{horizontalAlignment:'center', verticalAlignment:'center'}" />
