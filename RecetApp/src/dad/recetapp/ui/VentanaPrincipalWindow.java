@@ -6,18 +6,29 @@ import org.apache.pivot.beans.BXML;
 import org.apache.pivot.beans.Bindable;
 import org.apache.pivot.collections.Map;
 import org.apache.pivot.util.Resources;
-import org.apache.pivot.wtk.ImageView;
+import org.apache.pivot.wtk.Label;
 import org.apache.pivot.wtk.Window;
 
+
 public class VentanaPrincipalWindow extends Window implements Bindable {
-
+	
+	@BXML
+	private Window ventanaPrincipalWindow;
+	@BXML
 	private CategoriasPane categoriasPane;
-	@BXML private ImageView imagen;
-
+	@BXML
+    private static Label numRecetas;
+	
 	@Override
 	public void initialize(Map<String, Object> namespace, URL location, Resources resources) {
+		ventanaPrincipalWindow.setIcon("/dad/recetapp/ui/images/logo.png");
+		
+		
 		categoriasPane = new CategoriasPane();
 		//	Enviamos el Window a categoriaPane.
 		categoriasPane.setWindows(this);
+		
+		
+		//numRecetas.setText(String.valueOf(ServiceLocator.getRecetasService().listarRecetas().size()));
 	}
 }

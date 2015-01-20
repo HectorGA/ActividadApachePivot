@@ -8,7 +8,6 @@ import org.apache.pivot.beans.Bindable;
 import org.apache.pivot.collections.Map;
 import org.apache.pivot.collections.Sequence;
 import org.apache.pivot.util.Resources;
-import org.apache.pivot.wtk.BoxPane;
 import org.apache.pivot.wtk.Button;
 import org.apache.pivot.wtk.ButtonPressListener;
 import org.apache.pivot.wtk.MessageType;
@@ -16,6 +15,7 @@ import org.apache.pivot.wtk.Prompt;
 import org.apache.pivot.wtk.PushButton;
 import org.apache.pivot.wtk.Sheet;
 import org.apache.pivot.wtk.SheetCloseListener;
+import org.apache.pivot.wtk.TablePane;
 import org.apache.pivot.wtk.TableView;
 import org.apache.pivot.wtk.TextInput;
 
@@ -23,7 +23,7 @@ import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.CategoriaItem;
 
-public class CategoriasPane extends BoxPane implements Bindable {
+public class CategoriasPane extends TablePane implements Bindable {
 
 	//	Nos traemos VentanaPrincipalWindows para usarla con el Prompt.
 	private VentanaPrincipalWindow ventanaPrincipalWindow;

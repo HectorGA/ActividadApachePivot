@@ -5,41 +5,62 @@
 	ui:CategoriasPane donde ui hace referencia a la localización
 	del paquete donde se encuentra la clase y CategoriasPane es 
 	el nombre de la clase. -->
-	<ui:CategoriasPane orientation="vertical"
+	
+	<ui:CategoriasPane
 	xmlns:bxml="http://pivot.apache.org/bxml"
-	xmlns:content="org.apache.pivot.wtk.content" xmlns:ui="dad.recetapp.ui"
-	xmlns="org.apache.pivot.wtk">
-		<FlowPane>
-			<Label text="Descripción:"
-				styles="{horizontalAlignment:'center', verticalAlignment:'center'}" />
-			<TextInput bxml:id="descripcionText"></TextInput>
+    xmlns:content="org.apache.pivot.wtk.content"
+    xmlns:ui="dad.recetapp.ui"
+    xmlns="org.apache.pivot.wtk" styles="{padding:8, horizontalSpacing:6}">
+    
+    <columns>
+		<TablePane.Column width="1*"/>
+	</columns>
+	<rows>
+		<TablePane.Row height="1*"/>
+		<TablePane.Row height="1*" />
+		<TablePane.Row height="1*"/>
+	</rows>
+	
+	<TablePane.Row height="-1">
+		<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+			<Label text="Descripción: "/>
+			<TextInput bxml:id="descripcionText"/>
 			<PushButton bxml:id="botonAnadir" buttonData="Añadir" />
 			<PushButton bxml:id="botonEliminar" buttonData="Eliminar" />
-		</FlowPane>
-		<Border>
-			<ScrollPane horizontalScrollBarPolicy="FILL_TO_CAPACITY">					
-				<!-- tabla de variables -->
-				<TableView bxml:id="tableViewCategoria" selectMode="MULTI">				
-					<!--  indica las columnas (en "name" ponemos el nombre de la propiedad del objeto a listar, en este caso las de VariableItem, que son "id" y "descripcion") -->
-					<columns>
-						<TableView.Column name="descripcion" width="200" headerData="Descripción" />
-					</columns>					
-					<!-- editor de filas -->
-					<rowEditor>
-						<!-- efectos: HORIZONTAL_SLIDE, VERTICAL_SLIDE, HORIZONTAL_FLIP, VERTICAL_FLIP, ZOOM, CROSSFADE -->
-						<content:TableViewRowEditor editEffect="VERTICAL_SLIDE">
-							<cellEditors>
-								<!-- editor para la columna con "name"=descripcion -->
-								<descripcion>
-									<TextInput textKey="descripcion" /> 
-								</descripcion>
-							</cellEditors>
-						</content:TableViewRowEditor>
-					</rowEditor>					
-				</TableView>				
-				<columnHeader>
-					<TableViewHeader tableView="$tableViewCategoria"/>
-				</columnHeader>
-			</ScrollPane>
-		</Border>
+		</BoxPane>
+	</TablePane.Row>
+			
+	<TablePane.Row height="-1">		       		
+		<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+			<Label  text=""/>
+		</BoxPane>		       			 					        
+	</TablePane.Row>
+	
+	<TablePane.Row height="1*" >	
+			<ScrollPane horizontalScrollBarPolicy="FILL_TO_CAPACITY">
+			<!-- tabla de variables -->
+            <TableView bxml:id="tableViewCategoria" styles="{includeTrailingVerticalGridLine:true}" selectMode="MULTI">
+            <!--  indica las columnas (en "name" ponemos el nombre de la propiedad del objeto a listar, en este caso las de VariableItem, que son "id" y "descripcion") -->
+                <columns>
+                    <TableView.Column name="descripcion" width="1*" headerData="Descripción"/>
+                </columns>
+                <!-- editor de filas -->
+                <rowEditor>
+                	<!-- efectos: HORIZONTAL_SLIDE, VERTICAL_SLIDE, HORIZONTAL_FLIP, VERTICAL_FLIP, ZOOM, CROSSFADE -->
+                	<content:TableViewRowEditor editEffect="VERTICAL_SLIDE">
+                		<cellEditors>
+                			<!-- editor para la columna con "name"=descripcion -->
+                			<descripcion>
+                				<TextInput textKey="descripcion"/>
+                			</descripcion>
+                		</cellEditors>
+                	</content:TableViewRowEditor>
+                </rowEditor>
+            </TableView>
+            <columnHeader>
+                <TableViewHeader tableView="$tableViewCategoria" sortMode="single_column" />
+            </columnHeader>
+        	</ScrollPane>						       			 					        
+		</TablePane.Row>
+		
 	</ui:CategoriasPane>
