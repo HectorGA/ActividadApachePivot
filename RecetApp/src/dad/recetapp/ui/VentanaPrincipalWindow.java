@@ -11,13 +11,13 @@ import org.apache.pivot.wtk.Window;
 
 public class VentanaPrincipalWindow extends Window implements Bindable {
 
-	private VentanaPrincipalWindow ventanaPrincipalWindow;
-	@BXML
-	private ImageView imagen;
+	private CategoriasPane categoriasPane;
+	@BXML private ImageView imagen;
 
 	@Override
 	public void initialize(Map<String, Object> namespace, URL location, Resources resources) {
-
-		
+		categoriasPane = new CategoriasPane();
+		//	Enviamos el Window a categoriaPane.
+		categoriasPane.setWindows(this);
 	}
 }

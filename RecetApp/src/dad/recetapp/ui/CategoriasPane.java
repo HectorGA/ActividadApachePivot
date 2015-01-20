@@ -14,9 +14,10 @@ import org.apache.pivot.wtk.ButtonPressListener;
 import org.apache.pivot.wtk.MessageType;
 import org.apache.pivot.wtk.Prompt;
 import org.apache.pivot.wtk.PushButton;
+import org.apache.pivot.wtk.Sheet;
+import org.apache.pivot.wtk.SheetCloseListener;
 import org.apache.pivot.wtk.TableView;
 import org.apache.pivot.wtk.TextInput;
-import org.apache.pivot.wtk.Window;
 
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
@@ -24,7 +25,7 @@ import dad.recetapp.services.items.CategoriaItem;
 
 public class CategoriasPane extends BoxPane implements Bindable {
 
-	//	TODO Configurar para traer Window desde VentanaPrincipalWindow.java
+	//	Nos traemos VentanaPrincipalWindows para usarla con el Prompt.
 	private VentanaPrincipalWindow ventanaPrincipalWindow;
 	// esta lista es una lista observable (cuando modificamos su contenido los
 	// observadores,
@@ -72,6 +73,12 @@ public class CategoriasPane extends BoxPane implements Bindable {
 		});
 	}
 	
+	/**
+	 * Este metodo crea un objeto CategoriaItem y lo agrega a la lista
+	 * del tableview, luego invoca el servicio crearCategoria para
+	 * crear la nueva categoría en la base de datos.
+	 */
+	
 	private void onBotonAnadirPressed() {
 		CategoriaItem nueva = new CategoriaItem();
 		nueva.setDescripcion(descripcionText.getText());
@@ -88,7 +95,16 @@ public class CategoriasPane extends BoxPane implements Bindable {
 		descripcionText.setText("");
 	}
 	
+	
+	/**
+	 * Esta clase esta vinculada al botonEliminar del xml al pulsar
+	 * borra el objeto de la lista y hace un delete en la base de datos
+	 * con la descripción de la categoria a borrar.
+	 */
 	protected void onBotonEliminarPressed() {
+		
+		//	TODO Sigue sin funcionar el Prompt lanza un error "java.lang.IllegalArgumentException: owner is null"
+		//	owner es un elemento que se supone trae ventanaPrincipalWindow
 		StringBuffer mensaje = new StringBuffer();
 		mensaje.append("¿Desea eliminar las siguientes variables?\n\n");
 		
@@ -98,13 +114,15 @@ public class CategoriasPane extends BoxPane implements Bindable {
 			mensaje.append(" - " + variableSeleccionada.getDescripcion() + "\n");
 		}
 		
-		ArrayList<String> siNo = new ArrayList<String>();
+		//	No acepta el metodo para agregar la colección del ejemplo y no tengo claro por que
+		//	Si creo el ArrayList primero ya el constructor del Prompt acepta la collección.
+		org.apache.pivot.collections.ArrayList<String> siNo = new org.apache.pivot.collections.ArrayList<String>();
 		siNo.add("Si");
 		siNo.add("No");
 		
 		Prompt confirmar = new Prompt(MessageType.WARNING, mensaje.toString(), (Sequence<?>) siNo);
 		
-		/*confirmar.open(this, new SheetCloseListener() {
+		confirmar.open(ventanaPrincipalWindow, new SheetCloseListener() {
 			public void sheetClosed(Sheet sheet) {
 				
 				if (confirmar.getResult() && confirmar.getSelectedOption().equals("Sí")) {
@@ -114,11 +132,15 @@ public class CategoriasPane extends BoxPane implements Bindable {
 					}
 				}
 			}
-		});*/
+		});
 	}
 	
-	public void setWindows(Window window){
-		
+	/**
+	 * Este metodo recibe una ventana que luego usaremos en el Prompt.
+	 * @param window
+	 */
+	public void setWindows(VentanaPrincipalWindow window){
+		ventanaPrincipalWindow = window;
 	}
 
 	
