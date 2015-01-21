@@ -16,16 +16,16 @@ import org.apache.pivot.wtk.TextInput;
 
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
-import dad.recetapp.services.items.TipoIngredienteItem;
+import dad.recetapp.services.items.TipoAnotacionItem;
 
-public class IngredientesPane extends BoxPane implements Bindable {
+public class AnotacionesPane extends BoxPane implements Bindable {
 
 	// Esta lista es una lista observable (cuando modificamos su contenido los
 	// observadores,
 	// como el TableView, se enteran sin necesidad de avisarles)
-	private org.apache.pivot.collections.List<TipoIngredienteItem> variables;
+	private org.apache.pivot.collections.List<TipoAnotacionItem> variables;
 	// Componentes para gestionar la pestaña Categoria.
-	@BXML private TableView tableViewIngredientes;
+	@BXML private TableView tableViewAnotacion;
 	@BXML private PushButton botonAnadir;
 	@BXML private PushButton botonEliminar;
 	@BXML private TextInput descripcionText;
@@ -34,19 +34,19 @@ public class IngredientesPane extends BoxPane implements Bindable {
 	public void initialize(Map<String, Object> namespace, URL location, Resources resources) {
 		//******* RELLENAMOS LA TABLA ********//
 		// Hacemos un listar Ingredientes para obtener todas las descripciones
-		java.util.List<TipoIngredienteItem> traerIngredientes = new ArrayList<TipoIngredienteItem>();
+		java.util.List<TipoAnotacionItem> traerAnotaciones = new ArrayList<TipoAnotacionItem>();
 		try {
-			traerIngredientes = ServiceLocator.getTiposIngredientesService().listarTipoIngrediente();
+			traerAnotaciones = ServiceLocator.getTipoAnotacionService().listarTipoAnotacion();
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 		
 		// Creamos una lista de categorias para el TableView.
-		variables = new org.apache.pivot.collections.ArrayList<TipoIngredienteItem>();
-		for (TipoIngredienteItem tipoIngrediente : traerIngredientes) {
-			variables.add(tipoIngrediente);
+		variables = new org.apache.pivot.collections.ArrayList<TipoAnotacionItem>();
+		for (TipoAnotacionItem tipoAnotacion : traerAnotaciones) {
+			variables.add(tipoAnotacion);
 		}
-		tableViewIngredientes.setTableData(variables);
+		tableViewAnotacion.setTableData(variables);
 		
 		//******** BOTONES *********//
 		botonAnadir.getButtonPressListeners().add(new ButtonPressListener() {
@@ -63,15 +63,15 @@ public class IngredientesPane extends BoxPane implements Bindable {
 	}
 	
 	/**
-	 * Este metodo crea un objeto TipoIngredienteItem y lo agrega a la lista
-	 * del tableview, luego invoca el servicio crearIngrediente para
-	 * crear un nuevo ingrediente en la base de datos.
+	 * Este metodo crea un objeto TipoAnotacionItem y lo agrega a la lista
+	 * del tableview, luego invoca el servicio crearTipoAnotacion para
+	 * crear una nueva tipoAnotacion en la base de datos.
 	 */
 	protected void onBotonAnadirPressed() {
-		TipoIngredienteItem nuevo = new TipoIngredienteItem();
-		nuevo.setNombre(descripcionText.getText());
+		TipoAnotacionItem nuevo = new TipoAnotacionItem();
+		nuevo.setDescripcion(descripcionText.getText());
 		try {
-			ServiceLocator.getTiposIngredientesService().crearTipoIngrediente(nuevo);
+			ServiceLocator.getTipoAnotacionService().crearTipoAnotacion(nuevo);
 		} catch (ServiceException e) {
 			String mensajeRerror = e.getMessage() + "\n\nDetalles: "
 					+ e.getCause().getMessage();

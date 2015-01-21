@@ -21,9 +21,9 @@ public class MedidasService implements IMedidasService{
 				throw new ServiceException("Error al crear la medida: debe rellenar todos los datos");
 			}			
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("insert into medida (nombre,abreviatura) values (?,?)");
-			statement.setString(1, medida.getAbreviatura());
-			statement.setString(2, medida.getNombre());
+			PreparedStatement statement = conn.prepareStatement("insert into medidas (nombre,abreviatura) values (?,?)");
+			statement.setString(1, medida.getNombre());
+			statement.setString(2, medida.getAbreviatura());
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {
@@ -72,7 +72,7 @@ public class MedidasService implements IMedidasService{
 		MedidaItem medida = null;
 		try {
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("select id,nombre,abreviatura from categorias");
+			PreparedStatement statement = conn.prepareStatement("select id,nombre,abreviatura from medidas");
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				medida = new MedidaItem();

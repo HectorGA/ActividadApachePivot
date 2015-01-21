@@ -22,7 +22,7 @@ public class TipoAnotacionService implements ITiposAnotacionesService{
 				throw new ServiceException("Error al crear el tipo de anotacion: debe especificar el tipo de anotacion");
 			}			
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("insert into tiposanotaciones (descripcion) values (?)");
+			PreparedStatement statement = conn.prepareStatement("insert into tipos_anotaciones (descripcion) values (?)");
 			statement.setString(1, TipoAnotacion.getDescripcion());
 			statement.executeUpdate();
 			statement.close();
@@ -41,7 +41,7 @@ public class TipoAnotacionService implements ITiposAnotacionesService{
 				throw new ServiceException("Error al recuperar el tipo de anotacion: Debe especificar el identificador");
 			}
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("update tiposanotaciones set descripcion=? where id = ?");
+			PreparedStatement statement = conn.prepareStatement("update tipos_anotaciones set descripcion = ? where id = ?");
 			statement.setString(1, TipoAnotacion.getDescripcion());
 			statement.setLong(2, TipoAnotacion.getId());
 			statement.executeUpdate();
@@ -58,7 +58,7 @@ public class TipoAnotacionService implements ITiposAnotacionesService{
 				throw new ServiceException("Error al recuperar el tipo de anotacion: Debe especificar el identificador");
 			}
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("delete from tiposanotaciones where id = ?");
+			PreparedStatement statement = conn.prepareStatement("delete from tipos_anotaciones where id = ?");
 			statement.setLong(1, id);
 			statement.executeUpdate();
 			statement.close();
@@ -73,7 +73,7 @@ public class TipoAnotacionService implements ITiposAnotacionesService{
 		TipoAnotacionItem tipoAnotacion = null;
 		try {
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("select id,descripcion from tiposanotaciones");
+			PreparedStatement statement = conn.prepareStatement("select id,descripcion from tipos_anotaciones");
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				tipoAnotacion = new TipoAnotacionItem();
@@ -97,7 +97,7 @@ public class TipoAnotacionService implements ITiposAnotacionesService{
 				throw new ServiceException("Error al recuperar el tipo de anotacion: Debe especificar el identificador");
 			}
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("select id,descripcion from tiposanotaciones where id = ?"); 
+			PreparedStatement statement = conn.prepareStatement("select id,descripcion from tipos_anotaciones where id = ?"); 
 			statement.setLong(1, id);
 			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {

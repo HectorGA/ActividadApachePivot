@@ -1,40 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-	<BoxPane orientation="vertical"
+	<!-- Este xml es controlado desde IngredientesPane.java
+	y para poder encontrar el xml lo iniciamos con la etiqueta 
+	ui:IngredientesPane donde ui hace referencia a la localización
+	del paquete donde se encuentra la clase y CategoriasPane es 
+	el nombre de la clase. -->
+	
+	<ui:IngredientesPane orientation="vertical"
 	xmlns:bxml="http://pivot.apache.org/bxml"
 	xmlns:content="org.apache.pivot.wtk.content" xmlns:ui="dad.recetapp.ui"
 	xmlns="org.apache.pivot.wtk">
 		<FlowPane>
 			<Label text="Nombre:"
 				styles="{horizontalAlignment:'center', verticalAlignment:'center'}" />
-			<TextInput></TextInput>
-			<PushButton buttonData="Añadir" />
-			<PushButton buttonData="Eliminar" />
+			<TextInput bxml:id="descripcionText"></TextInput>
+			<PushButton bxml:id="botonAnadir" buttonData="Añadir" />
+			<PushButton bxml:id="botonEliminar" buttonData="Eliminar" />
 		</FlowPane>
 		<Border>
-			<TablePane bxml:id="tablePane"
-				styles="{verticalSpacing:1, showHorizontalGridLines:true,
-            horizontalSpacing:1, showVerticalGridLines:true}">
-				<columns>
-					<TablePane.Column width="300" />
-				</columns>
-
-				<TablePane.Row>
-					<Label text="Nombre" styles="{horizontalAlignment:'center'}" />
-				</TablePane.Row>
-
-				<TablePane.Row>
-					<Label text="Nota" styles="{verticalAlignment:'center'}" />
-				</TablePane.Row>
-
-				<TablePane.Row>
-					<Label text="Sugerencia" styles="{verticalAlignment:'center'}" />
-				</TablePane.Row>
-
-				<TablePane.Row>
-					<Label text="Comentario" styles="{verticalAlignment:'center'}" />
-				</TablePane.Row>
-			</TablePane>
+			<ScrollPane horizontalScrollBarPolicy="FILL_TO_CAPACITY">					
+				<!-- tabla de variables -->
+				<TableView bxml:id="tableViewIngredientes" selectMode="MULTI">				
+					<columns>
+						<TableView.Column name="nombre" width="200" headerData="Nombre" />
+					</columns>					
+					<!-- editor de filas -->
+					<rowEditor>
+						<!-- efectos: HORIZONTAL_SLIDE, VERTICAL_SLIDE, HORIZONTAL_FLIP, VERTICAL_FLIP, ZOOM, CROSSFADE -->
+						<content:TableViewRowEditor editEffect="VERTICAL_SLIDE">
+							<cellEditors>
+								<!-- editor para la columna con "name"=descripcion -->
+								<nombre>
+									<TextInput textKey="nombre" /> 
+								</nombre>
+							</cellEditors>
+						</content:TableViewRowEditor>
+					</rowEditor>					
+				</TableView>				
+				<columnHeader>
+					<TableViewHeader tableView="$tableViewIngredientes"/>
+				</columnHeader>
+			</ScrollPane>
 		</Border>
-
-	</BoxPane>
+	</ui:IngredientesPane>

@@ -1,43 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	
-	<BoxPane orientation="vertical" styles="{fill:true}"
+	<ui:MedidasPane orientation="vertical" styles="{fill:true}"
 	xmlns:bxml="http://pivot.apache.org/bxml"
 	xmlns:content="org.apache.pivot.wtk.content" xmlns:ui="dad.recetapp.ui"
-	xmlns="org.apache.pivot.wtk">
-	
+	xmlns="org.apache.pivot.wtk">	
 		<FlowPane>
 			<Label text="Nombre:" styles="{horizontalAlignment:'center', verticalAlignment:'center'}" />
-			<TextInput></TextInput>
+			<TextInput bxml:id="nombreText"></TextInput>
 			<Label text="Abreviatura:" styles="{horizontalAlignment:'center', verticalAlignment:'center'}" />
-			<TextInput></TextInput>
-			<PushButton buttonData="Añadir" />
-			<PushButton buttonData="Eliminar" />
+			<TextInput bxml:id="abreviaturaText"></TextInput>
+			<PushButton bxml:id="botonAnadir" buttonData="Añadir" />
+			<PushButton bxml:id="botonEliminar" buttonData="Eliminar" />
 		</FlowPane>
 		<Border>
-			<TablePane bxml:id="tablePane"
-				styles="{verticalSpacing:1, showHorizontalGridLines:true, horizontalSpacing:1, showVerticalGridLines:true}">
-				<columns>
-					<TablePane.Column width="300" />
-					<TablePane.Column width="300" />
-				</columns>
-
-				<TablePane.Row>
-					<Label text="Nombre" styles="{horizontalAlignment:'center'}" />
-					<Label text="Abreviatura" styles="{horizontalAlignment:'center'}" />
-				</TablePane.Row>
-
-				<TablePane.Row>
-					<Label text="Nota" styles="{verticalAlignment:'center'}" />
-				</TablePane.Row>
-
-				<TablePane.Row>
-					<Label text="Sugerencia" styles="{verticalAlignment:'center'}" />
-				</TablePane.Row>
-
-				<TablePane.Row>
-					<Label text="Comentario" styles="{verticalAlignment:'center'}" />
-				</TablePane.Row>
-			</TablePane>
+			<ScrollPane horizontalScrollBarPolicy="FILL_TO_CAPACITY">
+				<TableView bxml:id="tableViewMedidas" selectMode="MULTI">
+					<columns>
+						<TableView.Column name="nombre" width="200" headerData="Nombre" />
+						<TableView.Column name="abreviatura" width="200" headerData="Abreviatura" />
+					</columns>
+					<rowEditor>
+						<content:TableViewRowEditor editEffect="VERTICAL_SLIDE">
+							<cellEditors>
+								<nombre>
+									<TextInput textKey="nombre" /> 
+								</nombre>
+								<abreviatura>
+									<TextInput textKey="abreviatura" /> 
+								</abreviatura>
+							</cellEditors>
+						</content:TableViewRowEditor>
+					</rowEditor>					
+				</TableView>				
+				<columnHeader>
+					<TableViewHeader tableView="$tableViewMedidas"/>
+				</columnHeader>
+			</ScrollPane>
 		</Border>
-
-	</BoxPane>
+	</ui:MedidasPane>

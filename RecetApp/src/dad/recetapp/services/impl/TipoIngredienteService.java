@@ -22,7 +22,7 @@ public class TipoIngredienteService implements ITiposIngredientesService{
 				throw new ServiceException("Error al crear el tipo de ingrediente: debe rellenar todos los datos");
 			}			
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("insert into tiposingredientes nombre = ?");
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO tipos_ingredientes (nombre) VALUES (?);");
 			statement.setString(1, tipoIngrediente.getNombre());
 			statement.executeUpdate();
 			statement.close();
@@ -41,7 +41,7 @@ public class TipoIngredienteService implements ITiposIngredientesService{
 				throw new ServiceException("Error al recuperar el tipo de ingrediente: Debe especificar el identificador");
 			}
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("update tiposingredientes set nombre = ? where id = ?");
+			PreparedStatement statement = conn.prepareStatement("update tipos_ingredientes set nombre = ? where id = ?");
 			statement.setString(1, tipoIngrediente.getNombre());
 			statement.setLong(2, tipoIngrediente.getId());
 			statement.executeUpdate();
@@ -58,7 +58,7 @@ public class TipoIngredienteService implements ITiposIngredientesService{
 				throw new ServiceException("Error al recuperar el tipo de ingrediente: Debe especificar el identificador");
 			}
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("delete from tiposingredientes where id = ?");
+			PreparedStatement statement = conn.prepareStatement("delete from tipos_ingredientes where id = ?");
 			statement.setLong(1, id);
 			statement.executeUpdate();
 			statement.close();
@@ -74,11 +74,11 @@ public class TipoIngredienteService implements ITiposIngredientesService{
 		TipoIngredienteItem tipoIngrediente = null;
 		try {
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("select id,nombre from tiposingredientes");
+			PreparedStatement statement = conn.prepareStatement("select id, nombre from tipos_ingredientes");
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				tipoIngrediente = new TipoIngredienteItem();
-				tipoIngrediente.setId(rs.getLong("id")); // categoria.setId(id);
+				tipoIngrediente.setId(rs.getLong("id"));
 				tipoIngrediente.setNombre(rs.getString("nombre"));
 				listTipoIngrediente.add(tipoIngrediente);
 			}
@@ -98,7 +98,7 @@ public class TipoIngredienteService implements ITiposIngredientesService{
 				throw new ServiceException("Error al recuperar el tipo de ingrediente: Debe especificar el identificador");
 		}
 		Connection conn = DataBase.getConnection();
-		PreparedStatement statement = conn.prepareStatement("select nombre from tiposingredientes where id = ?"); 
+		PreparedStatement statement = conn.prepareStatement("select nombre from tipos_ingredientes where id = ?"); 
 		statement.setLong(1, id);
 		ResultSet rs = statement.executeQuery();
 		if (rs.next()) {

@@ -35,7 +35,7 @@ public class Main {
 		}*/
 		
 		/* EJEMPLO PARA OBTENER UNA LISTA DE CATEGORIAS CON EL SERVICIO
-		 * listarCategoria.*/
+		 * listarCategoria.
 		
 		List<CategoriaItem> listaCategorias = new ArrayList<CategoriaItem>();
 		
@@ -49,7 +49,7 @@ public class Main {
 		for (CategoriaItem categoria : listaCategorias) {
 			String descripcion = categoria.getDescripcion();
 			System.out.println(descripcion);
-		}
+		}*/
 		
 		DesktopApplicationContext.main(RecetAppApplication.class, args);
 	}

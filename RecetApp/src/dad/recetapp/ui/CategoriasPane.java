@@ -53,7 +53,6 @@ public class CategoriasPane extends TablePane implements Bindable {
 		// Creamos una lista de categorias para el TableView.
 		variables = new org.apache.pivot.collections.ArrayList<CategoriaItem>();
 		for (CategoriaItem categoria : traerCategorias) {
-			System.out.println(categoria.getDescripcion());
 			variables.add(categoria);
 		}
 		
