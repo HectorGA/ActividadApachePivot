@@ -25,11 +25,8 @@ import dad.recetapp.services.items.CategoriaItem;
 
 public class CategoriasPane extends TablePane implements Bindable {
 
-	//	Nos traemos VentanaPrincipalWindows para usarla con el Prompt.
-	private VentanaPrincipalWindow ventanaPrincipalWindow;
-	// esta lista es una lista observable (cuando modificamos su contenido los
-	// observadores,
-	// como el TableView, se enteran sin necesidad de avisarles)
+	/* esta lista es una lista observable (cuando modificamos su contenido los observadores,
+	*como el TableView, se enteran sin necesidad de avisarles)*/
 	private org.apache.pivot.collections.List<CategoriaItem> variables;
 	// Componentes para gestionar la pestaña Categoria.
 	@BXML private TableView tableViewCategoria;
@@ -67,7 +64,11 @@ public class CategoriasPane extends TablePane implements Bindable {
 		
 		botonEliminar.getButtonPressListeners().add(new ButtonPressListener() {
 			public void buttonPressed(Button button) {
-				onBotonEliminarPressed();
+				try {
+					onBotonEliminarPressed();
+				} catch (ServiceException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
@@ -99,49 +100,48 @@ public class CategoriasPane extends TablePane implements Bindable {
 	 * Esta clase esta vinculada al botonEliminar del xml al pulsar
 	 * borra el objeto de la lista y hace un delete en la base de datos
 	 * con la descripción de la categoria a borrar.
+	 * @throws ServiceException 
 	 */
-	protected void onBotonEliminarPressed() {
-		
-		//	TODO Sigue sin funcionar el Prompt lanza un error "java.lang.IllegalArgumentException: owner is null"
-		//	owner es un elemento que se supone trae ventanaPrincipalWindow
-		StringBuffer mensaje = new StringBuffer();
-		mensaje.append("¿Desea eliminar las siguientes variables?\n\n");
-		
+	protected void onBotonEliminarPressed() throws ServiceException {
+		// Obtenemos las filas seleccionadas en el TableView, las recorremos y las vamos eliminando.
 		Sequence<?> seleccionados = tableViewCategoria.getSelectedRows();
 		for (int i = 0; i < seleccionados.getLength(); i++) {
 			CategoriaItem variableSeleccionada = (CategoriaItem) seleccionados.get(i);
-			mensaje.append(" - " + variableSeleccionada.getDescripcion() + "\n");
+			ServiceLocator.getCategoriasService().eliminarCategoria(variableSeleccionada.getId());
+			variables.remove((CategoriaItem)seleccionados.get(i));
 		}
 		
-		//	No acepta el metodo para agregar la colección del ejemplo y no tengo claro por que
-		//	Si creo el ArrayList primero ya el constructor del Prompt acepta la collección.
-		org.apache.pivot.collections.ArrayList<String> siNo = new org.apache.pivot.collections.ArrayList<String>();
-		siNo.add("Si");
-		siNo.add("No");
+		//****CON PROMPT****//
 		
-		Prompt confirmar = new Prompt(MessageType.WARNING, mensaje.toString(), (Sequence<?>) siNo);
-		
-		confirmar.open(ventanaPrincipalWindow, new SheetCloseListener() {
-			public void sheetClosed(Sheet sheet) {
-				
-				if (confirmar.getResult() && confirmar.getSelectedOption().equals("Sí")) {
-					Sequence<?> seleccionados = tableViewCategoria.getSelectedRows();
-					for (int i = 0; i < seleccionados.getLength(); i++) {
-						variables.remove((CategoriaItem)seleccionados.get(i));
-					}
-				}
-			}
-		});
+//		StringBuffer mensaje = new StringBuffer();
+//		mensaje.append("¿Desea eliminar las siguientes variables?\n\n");
+//		
+//		Sequence<?> seleccionados = tableViewCategoria.getSelectedRows();
+//		for (int i = 0; i < seleccionados.getLength(); i++) {
+//			CategoriaItem variableSeleccionada = (CategoriaItem) seleccionados.get(i);
+//			mensaje.append(" - " + variableSeleccionada.getDescripcion() + "\n");
+//		}
+//		
+//		//	No acepta el metodo para agregar la colección del ejemplo y no tengo claro por que
+//		//	Si creo el ArrayList primero ya el constructor del Prompt acepta la collección.
+//		org.apache.pivot.collections.ArrayList<String> siNo = new org.apache.pivot.collections.ArrayList<String>();
+//		siNo.add("Si");
+//		siNo.add("No");
+//		
+//		Prompt confirmar = new Prompt(MessageType.WARNING, mensaje.toString(), (Sequence<?>) siNo);
+//		
+//		confirmar.open(this, new SheetCloseListener() {
+//			public void sheetClosed(Sheet sheet) {
+//				
+//				if (confirmar.getResult() && confirmar.getSelectedOption().equals("Sí")) {
+//					Sequence<?> seleccionados = tableViewCategoria.getSelectedRows();
+//					for (int i = 0; i < seleccionados.getLength(); i++) {
+//						CategoriaItem variableSeleccionada = (CategoriaItem) seleccionados.get(i);
+//						ServiceLocator.getCategoriasService().eliminarCategoria(variableSeleccionada.getId());
+//						variables.remove((CategoriaItem)seleccionados.get(i));
+//					}
+//				}
+//			}
+//		});
 	}
-	
-	/**
-	 * Este metodo recibe una ventana que luego usaremos en el Prompt.
-	 * @param window
-	 */
-	public void setWindows(VentanaPrincipalWindow window){
-		ventanaPrincipalWindow = window;
-	}
-
-	
-
 }

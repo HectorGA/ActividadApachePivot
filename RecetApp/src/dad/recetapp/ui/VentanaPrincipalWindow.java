@@ -25,8 +25,6 @@ public class VentanaPrincipalWindow extends Window implements Bindable {
 		
 		
 		categoriasPane = new CategoriasPane();
-		//	Enviamos el Window a categoriaPane.
-		categoriasPane.setWindows(this);
 		
 		
 		//numRecetas.setText(String.valueOf(ServiceLocator.getRecetasService().listarRecetas().size()));
