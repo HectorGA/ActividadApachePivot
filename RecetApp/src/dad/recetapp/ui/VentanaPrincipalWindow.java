@@ -9,8 +9,13 @@ import org.apache.pivot.util.Resources;
 import org.apache.pivot.wtk.Label;
 import org.apache.pivot.wtk.Window;
 
+import dad.recetapp.RecetAppApplication;
+
 
 public class VentanaPrincipalWindow extends Window implements Bindable {
+	
+	@SuppressWarnings("unused")
+	private RecetAppApplication recetAppApplication;
 	
 	@BXML
 	private Window ventanaPrincipalWindow;
@@ -23,10 +28,10 @@ public class VentanaPrincipalWindow extends Window implements Bindable {
 	public void initialize(Map<String, Object> namespace, URL location, Resources resources) {
 		ventanaPrincipalWindow.setIcon("/dad/recetapp/ui/images/logo.png");
 		
-		
-		categoriasPane = new CategoriasPane();
-		
-		
 		//numRecetas.setText(String.valueOf(ServiceLocator.getRecetasService().listarRecetas().size()));
+	}
+	
+	public void setRecetAppApplication(RecetAppApplication recetAppApplication){
+		this.recetAppApplication = recetAppApplication;
 	}
 }

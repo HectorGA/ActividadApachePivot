@@ -52,9 +52,9 @@ public class CategoriasService implements ICategoriasService {
 			conn = DataBase.getConnection();
 			// Preparamos la consulta
 			PreparedStatement statement = conn
-					.prepareStatement("update categorias set descripcion = ? where descripcion = ?");
+					.prepareStatement("update categorias set descripcion = ? where id = ?");
 			statement.setString(1, categoria.getDescripcion());
-			statement.setString(2, categoria.getDescripcion());
+			statement.setLong(2, categoria.getId());
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {

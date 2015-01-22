@@ -15,6 +15,8 @@ import dad.recetapp.ui.VentanaPrincipalWindow;
 public class RecetAppApplication implements Application{
 	private VentanaPrincipalWindow ventanaPrincipalWindow = null;
 	
+	private Display primaryDisplay = null;
+	
 	@Override
 	public void suspend() throws Exception { }
 
@@ -29,9 +31,11 @@ public class RecetAppApplication implements Application{
 	@Override
 	public void startup(Display display, Map<String, String> properties)
 			throws Exception {
+		primaryDisplay = display;
 		// Cambiamos la ruta para que en vez de usar recetappapachepivot use solo recetapp.
 		ventanaPrincipalWindow = (VentanaPrincipalWindow) loadWindow("dad/recetapp/ui/VentanaPrincipalWindow.bxml");
-		ventanaPrincipalWindow.open(display);
+		ventanaPrincipalWindow.setRecetAppApplication(this);
+		ventanaPrincipalWindow.open(primaryDisplay);
 
 	}
 
