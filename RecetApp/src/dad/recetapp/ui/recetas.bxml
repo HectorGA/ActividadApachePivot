@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:RecetasPane
+    xmlns:bxml="http://pivot.apache.org/bxml"
+    xmlns:content="org.apache.pivot.wtk.content"
+    xmlns:ui="dad.recetapp.ui"
+    xmlns="org.apache.pivot.wtk" styles="{padding:8, horizontalSpacing:6}">
+	   
+		<columns>
+			<TablePane.Column width="1*"/>
+		</columns>
+		<rows>
+			<TablePane.Row height="-1"/>
+			<TablePane.Row height="-1" />
+			<TablePane.Row height="1*"/>
+			<TablePane.Row height="-1"/>
+			<TablePane.Row height="-1"/>
+		</rows>
+
+		<TablePane.Row height="-1">
+			<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+				<Label  text="Nombre: "/>
+				<TextInput />
+				<Label  text="Hasta: "/>
+				<Spinner preferredWidth="40" selectedIndex="0">
+                        <spinnerData>
+                            <content:NumericSpinnerData lowerBound="0" increment="1"/>
+                        </spinnerData>
+                    </Spinner>
+				<Label  text=" M "/>
+				<Spinner preferredWidth="40" selectedIndex="0">
+                        <spinnerData>
+                            <content:NumericSpinnerData lowerBound="0" increment="1"/>
+                        </spinnerData>
+                    </Spinner>
+				<Label  text=" S "/>
+				<Label  text="Categoría: "/>
+				<ListButton bxml:id="categoriasListButton"/>
+			</BoxPane>
+		</TablePane.Row>
+			
+		<TablePane.Row height="-1">		       		
+			<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+				<Label  text=""/>
+			</BoxPane>		       			 					        
+		</TablePane.Row>	
+									        
+		<TablePane.Row height="1*" >	
+			<ScrollPane horizontalScrollBarPolicy="fill_to_capacity">
+            <TableView bxml:id="tableView" styles="{includeTrailingVerticalGridLine:true}" selectMode="MULTI">
+                <columns>
+                    <TableView.Column name="nombre" width="1*" headerData="Nombre"/>
+                    <TableView.Column name="cantidad" width="1*" headerData="Cantidad"/>
+                    <TableView.Column name="para" width="1*" headerData="Para"/>
+                    <TableView.Column name="tiempoTotal" width="1*" headerData="Tiempo total"/>
+                    <TableView.Column name="fechaCreacion" width="1*" headerData="Fecha de creación"/>
+                    <TableView.Column name="categoria" width="1*" headerData="Categoría"/>
+                </columns>
+            </TableView>
+            <columnHeader>
+                <TableViewHeader tableView="$tableViewReceta" sortMode="single_column" />
+            </columnHeader>
+        	</ScrollPane>						       			 					        
+		</TablePane.Row>
+		
+		<TablePane.Row height="-1">		       		
+			<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+				<Label text=""/>
+			</BoxPane>		       			 					        
+		</TablePane.Row>
+		
+		<TablePane.Row height="-1" >
+			<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+	            <PushButton bxml:id="botonAnadir" buttonData="Añadir" />
+				<PushButton bxml:id="botonEliminar" buttonData="Eliminar" />
+				<PushButton bxml:id="botonEditar" buttonData="Editar" />
+	        </BoxPane>
+		</TablePane.Row>
+
+</ui:RecetasPanel>

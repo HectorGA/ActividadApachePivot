@@ -6,40 +6,60 @@
 	del paquete donde se encuentra la clase y CategoriasPane es 
 	el nombre de la clase. -->
 	
-	<ui:IngredientesPane orientation="vertical"
+	<ui:IngredientesPane
 	xmlns:bxml="http://pivot.apache.org/bxml"
-	xmlns:content="org.apache.pivot.wtk.content" xmlns:ui="dad.recetapp.ui"
-	xmlns="org.apache.pivot.wtk">
-		<FlowPane>
-			<Label text="Nombre:"
-				styles="{horizontalAlignment:'center', verticalAlignment:'center'}" />
-			<TextInput bxml:id="descripcionText"></TextInput>
-			<PushButton bxml:id="botonAnadir" buttonData="Añadir" />
-			<PushButton bxml:id="botonEliminar" buttonData="Eliminar" />
-		</FlowPane>
-		<Border>
-			<ScrollPane horizontalScrollBarPolicy="FILL_TO_CAPACITY">					
-				<!-- tabla de variables -->
-				<TableView bxml:id="tableViewIngredientes" selectMode="MULTI">				
-					<columns>
-						<TableView.Column name="nombre" width="200" headerData="Nombre" />
-					</columns>					
-					<!-- editor de filas -->
-					<rowEditor>
-						<!-- efectos: HORIZONTAL_SLIDE, VERTICAL_SLIDE, HORIZONTAL_FLIP, VERTICAL_FLIP, ZOOM, CROSSFADE -->
-						<content:TableViewRowEditor editEffect="VERTICAL_SLIDE">
-							<cellEditors>
-								<!-- editor para la columna con "name"=descripcion -->
-								<nombre>
-									<TextInput textKey="nombre" /> 
-								</nombre>
-							</cellEditors>
-						</content:TableViewRowEditor>
-					</rowEditor>					
-				</TableView>				
-				<columnHeader>
-					<TableViewHeader tableView="$tableViewIngredientes"/>
-				</columnHeader>
-			</ScrollPane>
-		</Border>
+	xmlns:content="org.apache.pivot.wtk.content"
+	xmlns:ui="dad.recetapp.ui"
+	xmlns="org.apache.pivot.wtk" styles="{padding:8, horizontalSpacing:6}">
+
+	<columns>
+		<TablePane.Column width="1*"/>
+	</columns>
+	<rows>
+		<TablePane.Row height="1*"/>
+		<TablePane.Row height="1*" />
+		<TablePane.Row height="1*"/>
+	</rows>
+	
+	<TablePane.Row height="-1">
+			<BoxPane styles="{horizontalAlignment:'center',verticalAlignment:'center'}">
+				<Label text="Nombre: "/>
+				<TextInput bxml:id="nombreText" />
+				<PushButton bxml:id="botonAnadir" buttonData="Añadir" />
+				<PushButton bxml:id="botonEliminar" buttonData="Eliminar" />
+			</BoxPane>
+		</TablePane.Row>
+			
+		<TablePane.Row height="-1">		       		
+			<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+				<Label  text=""/>
+			</BoxPane>		       			 					        
+		</TablePane.Row>
+
+	<TablePane.Row height="1*" >	
+			<ScrollPane horizontalScrollBarPolicy="FILL_TO_CAPACITY">
+			<!-- tabla de variables -->
+            <TableView bxml:id="tableViewIngredientes" styles="{includeTrailingVerticalGridLine:true}" selectMode="MULTI">
+                <columns>
+                    <TableView.Column name="nombre" width="1*" headerData="Nombre"/>
+                </columns>
+                <!-- editor de filas -->
+                <rowEditor>
+                	<!-- efectos: HORIZONTAL_SLIDE, VERTICAL_SLIDE, HORIZONTAL_FLIP, VERTICAL_FLIP, ZOOM, CROSSFADE -->
+                	<content:TableViewRowEditor editEffect="VERTICAL_SLIDE">
+                		<cellEditors>
+                			<!-- editor para la columna con "name"=descripcion -->
+                			<nombre>
+                				<TextInput textKey="nombre"/>
+                			</nombre>
+                		</cellEditors>
+                	</content:TableViewRowEditor>
+                </rowEditor>
+            </TableView>
+            <columnHeader>
+                <TableViewHeader tableView="$tableViewIngredientes" sortMode="single_column" styles="{includeTrailingVerticalGridLine:true}"/>
+            </columnHeader>
+        	</ScrollPane>						       			 					        
+		</TablePane.Row>
+
 	</ui:IngredientesPane>

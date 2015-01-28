@@ -7,10 +7,10 @@ import org.apache.pivot.beans.BXML;
 import org.apache.pivot.beans.Bindable;
 import org.apache.pivot.collections.Map;
 import org.apache.pivot.util.Resources;
-import org.apache.pivot.wtk.BoxPane;
 import org.apache.pivot.wtk.Button;
 import org.apache.pivot.wtk.ButtonPressListener;
 import org.apache.pivot.wtk.PushButton;
+import org.apache.pivot.wtk.TablePane;
 import org.apache.pivot.wtk.TableView;
 import org.apache.pivot.wtk.TextInput;
 
@@ -18,7 +18,7 @@ import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.MedidaItem;
 
-public class MedidasPane extends BoxPane implements Bindable {
+public class MedidasPane extends TablePane implements Bindable {
 
 	// Esta lista es una lista observable (cuando modificamos su contenido los
 	// observadores,
