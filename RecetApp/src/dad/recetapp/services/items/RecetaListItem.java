@@ -9,7 +9,8 @@ public class RecetaListItem {
 	private Integer cantidad;
 	private String para;
 	private Integer tiempoTotal;
-	private CategoriaItem categoria;
+	private Integer tiempoThermomix;
+	private String categoria;
 
 	public Long getId() {
 		return id;
@@ -59,12 +60,34 @@ public class RecetaListItem {
 		this.tiempoTotal = tiempoTotal;
 	}
 
-	public CategoriaItem getCategoria() {
+	public Integer getTiempoThermomix() {
+		return tiempoThermomix;
+	}
+
+	public void setTiempoThermomix(Integer tiempoThermomix) {
+		this.tiempoThermomix = tiempoThermomix;
+	}
+
+	public String getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(CategoriaItem categoria) {
+	public void setCategoria(String categoria) {
 		this.categoria = categoria;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof RecetaListItem) {
+			RecetaListItem tipo = (RecetaListItem) obj;
+			return tipo.getId() == this.id;
+		}
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return nombre;
 	}
 
 }

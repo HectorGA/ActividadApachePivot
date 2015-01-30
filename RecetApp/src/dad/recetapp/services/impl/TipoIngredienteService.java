@@ -90,8 +90,7 @@ public class TipoIngredienteService implements ITiposIngredientesService{
 	}
 
 	@Override
-	public TipoIngredienteItem obteneTipoIngrediente(Long id)
-			throws ServiceException {
+	public TipoIngredienteItem obtenerTipoIngrediente(Long id) throws ServiceException {
 		TipoIngredienteItem tipoIngrediente = null;
 		try{
 			if(id==null){

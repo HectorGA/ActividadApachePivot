@@ -34,4 +34,17 @@ public class SeccionItem {
 		return instrucciones;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof SeccionItem) {
+			SeccionItem tipo = (SeccionItem) obj;
+			return tipo.getId() == this.id;
+		}
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return nombre;
+	}
 }

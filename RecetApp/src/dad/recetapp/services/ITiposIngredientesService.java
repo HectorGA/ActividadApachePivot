@@ -10,7 +10,7 @@ public interface ITiposIngredientesService {
 	public void modificarTipoIngrediente(TipoIngredienteItem tipoIngrediente) throws ServiceException;
 	public void eliminarTipoIngrediente(Long id) throws ServiceException;
 	public List<TipoIngredienteItem> listarTipoIngrediente() throws ServiceException;
-	public TipoIngredienteItem obteneTipoIngrediente(Long id) throws ServiceException;
+	public TipoIngredienteItem obtenerTipoIngrediente(Long id) throws ServiceException;
 
 
 }

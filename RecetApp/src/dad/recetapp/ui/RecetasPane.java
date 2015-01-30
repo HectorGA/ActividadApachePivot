@@ -1,25 +1,18 @@
 package dad.recetapp.ui;
 
-import java.io.IOException;
 import java.net.URL;
 
 import org.apache.pivot.beans.BXML;
 import org.apache.pivot.beans.Bindable;
 import org.apache.pivot.collections.ArrayList;
 import org.apache.pivot.collections.Map;
-import org.apache.pivot.collections.Sequence;
-import org.apache.pivot.serialization.SerializationException;
 import org.apache.pivot.util.Resources;
 import org.apache.pivot.wtk.Button;
 import org.apache.pivot.wtk.ButtonPressListener;
 import org.apache.pivot.wtk.ListButton;
-import org.apache.pivot.wtk.MessageType;
-import org.apache.pivot.wtk.Prompt;
-import org.apache.pivot.wtk.Sheet;
-import org.apache.pivot.wtk.SheetCloseListener;
 import org.apache.pivot.wtk.TablePane;
 import org.apache.pivot.wtk.TableView;
-
+import org.apache.pivot.collections.List;
 
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
@@ -29,24 +22,24 @@ import dad.recetapp.services.items.RecetaListItem;
 public class RecetasPane extends TablePane implements Bindable {
 
 	@BXML
-	private TableView tableView;
-	private org.apache.pivot.collections.List<RecetaListItem> variables;
+	private TableView tableViewRecetas;
+	private org.apache.pivot.collections.List<RecetaListItem> recetas;
 	private org.apache.pivot.collections.List<RecetaListItem> lista;
 	@BXML
 	private static ListButton categoriasListButton;
 	private static org.apache.pivot.collections.List<CategoriaItem> categoriasBD;
 	@BXML
-	private Button anadirRecetaButton;
+	private Button botonAnadir;
 	@BXML
-	private Button eliminarRecetaButton;
+	private Button botonEliminar;
 	@BXML
-	private Button editarRecetaButton;
+	private Button botonEditar;
 
 	@SuppressWarnings({ "unchecked" })
 	@Override
 	public void initialize(Map<String, Object> namespace, URL location, Resources resources) {
-		/*
-		variables = new org.apache.pivot.collections.ArrayList<RecetaListItem>();
+		
+		recetas = new org.apache.pivot.collections.ArrayList<RecetaListItem>();
 
 		try {
 			lista = convertirList(ServiceLocator.getRecetasService().listarRecetas());
@@ -54,38 +47,39 @@ public class RecetasPane extends TablePane implements Bindable {
 			e.printStackTrace();
 		}
 		for (RecetaListItem l : lista) {
-			variables.add(l);
+			recetas.add(l);
 		}
-		tableView.setTableData(variables);
-
+		tableViewRecetas.setTableData(recetas);
+		
 		try {
 			recargarCategoriaListButton();
 
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
+		
 
-		anadirRecetaButton.getButtonPressListeners().add(new ButtonPressListener() {
+		botonAnadir.getButtonPressListeners().add(new ButtonPressListener() {
 			@Override
 			public void buttonPressed(Button button) {
 				onAnadirRecetaButtonActionPerformed();
 			}
 		});
 
-		eliminarRecetaButton.getButtonPressListeners().add(new ButtonPressListener() {
+		botonEliminar.getButtonPressListeners().add(new ButtonPressListener() {
 			@Override
 			public void buttonPressed(Button button) {
 				onEliminarRecetaButtonActionPerformed();
 			}
 		});
 
-		editarRecetaButton.getButtonPressListeners().add(new ButtonPressListener() {
+		botonEditar.getButtonPressListeners().add(new ButtonPressListener() {
 			@Override
 			public void buttonPressed(Button button) {
 				onEditarRecetaButtonActionPerformed();
 			}
 		});
-		*/
+		
 	}
 
 	protected void onEditarRecetaButtonActionPerformed() {
@@ -127,15 +121,15 @@ public class RecetasPane extends TablePane implements Bindable {
 
 	@SuppressWarnings("unchecked")
 	public static void recargarCategoriaListButton() throws ServiceException {
-		/*
+		
 		CategoriaItem categoriaTitle = new CategoriaItem();
 		categoriaTitle.setId(null);
 		categoriaTitle.setDescripcion("<Categorías>");
-		categoriasBD = convertirList(ServiceLocator.getCategoriasService().listarCategorias());
+		categoriasBD = convertirList(ServiceLocator.getCategoriasService().listarCategoria());
 		categoriasBD.insert(categoriaTitle, 0);
 		categoriasListButton.setListData(categoriasBD);
 		categoriasListButton.setSelectedItem(categoriaTitle);
-		*/
+		
 	}
 
 	protected void onEliminarRecetaButtonActionPerformed() {
@@ -177,14 +171,14 @@ public class RecetasPane extends TablePane implements Bindable {
 		}
 		*/
 	}
-	/*
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected static org.apache.pivot.collections.List convertirList(java.util.List<?> listaUtil){
-		org.apache.pivot.collections.List listaApache = new org.apache.pivot.collections.ArrayList();
+	protected static List convertirList(java.util.List<?> listaUtil){
+		List listaApache = new ArrayList();
 		for(int i = 0; i<listaUtil.size(); i++){
 			listaApache.add(listaUtil.get(i));
 		}
 		return listaApache;
 	}
-	 */
+	 
 }

@@ -21,7 +21,7 @@
 		                        <TabPane.tabData>
 		                             <content:ButtonData text="Recetas"/>
 		                        </TabPane.tabData>
-		                                            	     
+		                        <bxml:include bxml:id="RecetasPane" src="recetas.bxml"/>
 	                        </FillPane>
 	                        <FillPane>
 	                            <TabPane.tabData>
