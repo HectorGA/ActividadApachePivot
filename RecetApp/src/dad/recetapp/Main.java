@@ -1,18 +1,9 @@
 package dad.recetapp;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.swing.JOptionPane;
-
 import org.apache.pivot.wtk.DesktopApplicationContext;
-
 import dad.recetapp.db.DataBase;
-import dad.recetapp.services.ServiceException;
-import dad.recetapp.services.ServiceLocator;
-import dad.recetapp.services.items.CategoriaItem;
+
 
 public class Main {
 

@@ -10,12 +10,12 @@ import org.apache.pivot.wtk.Application;
 import org.apache.pivot.wtk.Display;
 import org.apache.pivot.wtk.Window;
 
-import dad.recetapp.ui.VentanaPrincipalWindow;
+import dad.recetapp.ui.Inicio;
+import dad.recetapp.ui.images.Images;
 
 public class RecetAppApplication implements Application{
-	private VentanaPrincipalWindow ventanaPrincipalWindow = null;
 	
-	private Display primaryDisplay = null;
+	private Inicio inicio = null;
 	
 	@Override
 	public void suspend() throws Exception { }
@@ -29,14 +29,12 @@ public class RecetAppApplication implements Application{
 	}
 
 	@Override
-	public void startup(Display display, Map<String, String> properties)
-			throws Exception {
-		primaryDisplay = display;
-		// Cambiamos la ruta para que en vez de usar recetappapachepivot use solo recetapp.
-		ventanaPrincipalWindow = (VentanaPrincipalWindow) loadWindow("dad/recetapp/ui/VentanaPrincipalWindow.bxml");
-		ventanaPrincipalWindow.setRecetAppApplication(this);
-		ventanaPrincipalWindow.open(primaryDisplay);
-
+	public void startup(Display display, Map<String, String> properties) throws Exception {		
+		inicio = (Inicio) loadWindow("dad/recetapp/ui/inicio.bxml");
+		inicio.open(display);
+		inicio.setTitle("RecetApp");
+		java.awt.Window frame = display.getHostWindow();
+		frame.setIconImage(Images.LOGO_ICON.getImage());
 	}
 
 	public static Window loadWindow(String bxmlFile) throws IOException, SerializationException {

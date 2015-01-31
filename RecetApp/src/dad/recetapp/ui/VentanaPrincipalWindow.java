@@ -27,7 +27,6 @@ public class VentanaPrincipalWindow extends Window implements Bindable {
 	@Override
 	public void initialize(Map<String, Object> namespace, URL location, Resources resources) {
 		ventanaPrincipalWindow.setIcon("/dad/recetapp/ui/images/logo.png");
-		
 		//numRecetas.setText(String.valueOf(ServiceLocator.getRecetasService().listarRecetas().size()));
 	}
 	
