@@ -38,9 +38,9 @@
 
 		<BoxPane>
 			<FillPane styles="{padding:5}" orientation="vertical">
-				<PushButton bxml:id="abrirAnadir" buttonData="Añadir" />
-				<PushButton buttonData="Eliminar" />
-				<PushButton bxml:id="abrirEditar" buttonData="Editar" />
+				<PushButton bxml:id="botonAnadir" buttonData="Añadir" />
+				<PushButton bxml:id="botonEliminar" buttonData="Eliminar" />
+				<PushButton bxml:id="botonEditar" buttonData="Editar" />
 			</FillPane>
 		</BoxPane>
 
@@ -51,7 +51,7 @@
 		<Border title="Recetas:" styles="{padding:5}">
 			<Border>
 				<ScrollPane horizontalScrollBarPolicy="FILL_TO_CAPACITY">
-					<TableView bxml:id="recetasView" selectMode="MULTI">
+					<TableView bxml:id="tableViewRecetas" selectMode="MULTI">
 
 						<!-- indica las columnas (en "name" ponemos el nombre de la propiedad 
 							del objeto a listar, en este caso las de VariableItem, que son "nombre" y 
@@ -99,7 +99,7 @@
 						</rowEditor>
 					</TableView>
 					<columnHeader>
-						<TableViewHeader tableView="$recetasView" />
+						<TableViewHeader tableView="$tableViewRecetas" />
 					</columnHeader>
 				</ScrollPane>
 			</Border>

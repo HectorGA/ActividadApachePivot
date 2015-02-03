@@ -31,9 +31,10 @@ public class RecetasPane extends TablePane implements Bindable {
 	
 	private List<RecetaListItem> recetas,nuevalist;
 	private RecetAppApplication windowsApp;
-	@BXML private PushButton abrirAnadir;	
-	@BXML private PushButton abrirEditar;
-	@BXML private TableView recetasView;
+	@BXML private PushButton botonAnadir;	
+	@BXML private PushButton botonEditar;
+	@BXML private PushButton botonEliminar;
+	@BXML private TableView tableViewRecetas;
 	@BXML private TextInput nombretext;
 	@BXML private Spinner filtrarMinutos,filtrarSegundos;
 	private List lista;
@@ -45,81 +46,93 @@ public class RecetasPane extends TablePane implements Bindable {
 	public void initialize(Map<String, Object> arg0, URL arg1, Resources arg2) {
 		
 		recetas= new ArrayList<RecetaListItem>();
-		recetasView.setTableData(recetas);
+		tableViewRecetas.setTableData(recetas);
 		
 		initRecetasView();
 		try {
 			recargarCategoriaListButton();
 		} catch (ServiceException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
-		comboReceta.getListButtonSelectionListeners().add(new ListButtonSelectionListener.Adapter() {
-			 public void selectedItemChanged(ListButton listButton, Object previousSelectedItem) {
-			 filtroTabla();
-			 }
-			 });
-			 
-		nombretext.getComponentKeyListeners().add(new ComponentKeyListener.Adapter(){
-			 @Override
-			 public boolean keyTyped(Component arg0, char arg1) {
-			 try {
-			 filtroTabla();
-			 } catch (NullPointerException e) {}
-			 return false;
-			 }
-			 });
-		filtrarMinutos.getSpinnerSelectionListeners().add(new SpinnerSelectionListener() {
-			 @Override
-			 public void selectedItemChanged(Spinner arg0, Object arg1) {
-			 filtroTabla();
-			 }
-			 @Override
-			 public void selectedIndexChanged(Spinner arg0, int arg1) {
-			 filtroTabla();
-			 }
-			 });
-		filtrarSegundos.getSpinnerSelectionListeners().add(new SpinnerSelectionListener() {
+		comboReceta.getListButtonSelectionListeners().add(
+				new ListButtonSelectionListener.Adapter() {
+					public void selectedItemChanged(ListButton listButton,
+							Object previousSelectedItem) {
+						filtroTabla();
+					}
+				});
 
-			 @Override
-			 public void selectedItemChanged(Spinner arg0, Object arg1) {
-			 filtroTabla();
-			 }
+		nombretext.getComponentKeyListeners().add(
+				new ComponentKeyListener.Adapter() {
+					@Override
+					public boolean keyTyped(Component arg0, char arg1) {
+						try {
+							filtroTabla();
+						} catch (NullPointerException e) {
+						}
+						return false;
+					}
+				});
+		filtrarMinutos.getSpinnerSelectionListeners().add(
+				new SpinnerSelectionListener() {
+					@Override
+					public void selectedItemChanged(Spinner arg0, Object arg1) {
+						filtroTabla();
+					}
 
-			 @Override
-			 public void selectedIndexChanged(Spinner arg0, int arg1) {
-			 filtroTabla();
-			 }
-			 });
+					@Override
+					public void selectedIndexChanged(Spinner arg0, int arg1) {
+						filtroTabla();
+					}
+				});
+		filtrarSegundos.getSpinnerSelectionListeners().add(
+				new SpinnerSelectionListener() {
+
+					@Override
+					public void selectedItemChanged(Spinner arg0, Object arg1) {
+						filtroTabla();
+					}
+
+					@Override
+					public void selectedIndexChanged(Spinner arg0, int arg1) {
+						filtroTabla();
+					}
+				});
 
 
-			
-		
-			
-		///////////////////////////////////////////////
-		abrirAnadir.getButtonPressListeners().add(new ButtonPressListener() {
+
+		botonAnadir.getButtonPressListeners().add(new ButtonPressListener() {
 			public void buttonPressed(Button arg0) {
-				onAbrirAñadirButtonPressed();
+				onBotonAnadirPressed();
 			}
 		});
-		
-		abrirEditar.getButtonPressListeners().add(new ButtonPressListener() {
+
+		botonEditar.getButtonPressListeners().add(new ButtonPressListener() {
 			public void buttonPressed(Button arg0) {
-				onAbrirEditarButtonPressed();
+				onBotonEditarPressed();
+			}
+		});
+		botonEliminar.getButtonPressListeners().add(new ButtonPressListener() {
+			public void buttonPressed(Button arg0) {
+				onBotonEliminarPressed();
 			}
 		});
 	}
 
-
-
-	protected void onAbrirEditarButtonPressed() {			
+	protected void onBotonAnadirPressed() {	
+		System.out.println("añadir");
+		//windowsApp.openSecondWindow();
+	}
+	
+	protected void onBotonEditarPressed() {		
+		System.out.println("editar");
 		//windowsApp.abrirEditarWindow();
 	}
-
-	protected void onAbrirAñadirButtonPressed() {	
+	
+	protected void onBotonEliminarPressed() {
+		System.out.println("eliminar");
 		//windowsApp.openSecondWindow();
-		
 	}
 
 	public void setWindowsApp(RecetAppApplication windowsApp) {
@@ -136,40 +149,43 @@ public class RecetasPane extends TablePane implements Bindable {
 			
 		}
 	}
+	
 	@SuppressWarnings("unchecked")
-	 public static void recargarCategoriaListButton() throws ServiceException {
-	 CategoriaItem categoriaTitle = new CategoriaItem();
-	 categoriaTitle.setId(null);
-	 categoriaTitle.setDescripcion("<Categorías>");
-	 categoriasBD = convertirList(ServiceLocator.getCategoriasService().listarCategoria());
-	 categoriasBD.insert(categoriaTitle, 0);	 
-	 comboReceta.setListData(categoriasBD);
-	 comboReceta.setSelectedItem(categoriaTitle);
-	 }
+	public static void recargarCategoriaListButton() throws ServiceException {
+		CategoriaItem categoriaTitle = new CategoriaItem();
+		categoriaTitle.setId(null);
+		categoriaTitle.setDescripcion("<Categorías>");
+		categoriasBD = convertirList(ServiceLocator.getCategoriasService().listarCategoria());
+		categoriasBD.insert(categoriaTitle, 0);
+		comboReceta.setListData(categoriasBD);
+		comboReceta.setSelectedItem(categoriaTitle);
+	}
 
-	 @SuppressWarnings({ "rawtypes", "unchecked" })
-	 protected static org.apache.pivot.collections.List convertirList(java.util.List<?> listaUtil){
-	 org.apache.pivot.collections.List listaApache = new org.apache.pivot.collections.ArrayList();
-	 for(int i = 0; i<listaUtil.size(); i++){
-	 listaApache.add(listaUtil.get(i));
-	 }
-	 return listaApache;
-	 }
-	 
-	 @SuppressWarnings("unchecked")
-	 protected void filtroTabla(){
-	 CategoriaItem selectedItem = (CategoriaItem) comboReceta.getSelectedItem();
-	 Integer tiempoFinal=(filtrarMinutos.getSelectedIndex()*60)+filtrarSegundos.getSelectedIndex();
-	 if (tiempoFinal==0){tiempoFinal=null;} 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected static org.apache.pivot.collections.List convertirList(
+			java.util.List<?> listaUtil) {
+		org.apache.pivot.collections.List listaApache = new org.apache.pivot.collections.ArrayList();
+		for (int i = 0; i < listaUtil.size(); i++) {
+			listaApache.add(listaUtil.get(i));
+		}
+		return listaApache;
+	}
 
-	 if (selectedItem != null) {
-	 try {
-	 lista= convertirList( ServiceLocator.getRecetasService().buscarRecetas(nombretext.getText(), tiempoFinal, selectedItem.getId()));
-	 } catch (ServiceException e) {
-	 e.printStackTrace();
-	 }
-	 }
-	 recetasView.setTableData(lista);
-	 }
+	
+	protected void filtroTabla() {
+		CategoriaItem selectedItem = (CategoriaItem) comboReceta.getSelectedItem();
+		Integer tiempoFinal = (filtrarMinutos.getSelectedIndex() * 60) + filtrarSegundos.getSelectedIndex();
+		if (tiempoFinal == 0) {
+			tiempoFinal = null;
+		}
 
+		if (selectedItem != null) {
+			try {
+				lista = convertirList(ServiceLocator.getRecetasService().buscarRecetas(nombretext.getText(), tiempoFinal, selectedItem.getId()));
+			} catch (ServiceException e) {
+				e.printStackTrace();
+			}
+		}
+		tableViewRecetas.setTableData(lista);
+	}
 }
