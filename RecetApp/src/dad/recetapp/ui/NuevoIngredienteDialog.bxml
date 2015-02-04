@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:NuevoIngredienteDialog bxml:id="nuevoIngredienteDialog" modal="true" title="Nuevo ingrediente"
+    xmlns:bxml="http://pivot.apache.org/bxml"
+    xmlns:content="org.apache.pivot.wtk.content"
+    xmlns:ui="dad.recetapp.ui"
+    xmlns="org.apache.pivot.wtk" >
+	   
+	
+       <TablePane styles="{padding:8, horizontalSpacing:6}">
+	            
+		<columns>
+			<TablePane.Column width="1*"/>
+		</columns>
+		<rows>
+			<TablePane.Row height="-1"/>
+			<TablePane.Row height="-1" />
+			<TablePane.Row height="-1"/>
+			<TablePane.Row height="-1"/>
+			<TablePane.Row height="-1" />
+			<TablePane.Row height="-1"/>
+			<TablePane.Row height="-1" />
+			<TablePane.Row height="-1"/>
+			<TablePane.Row height="-1"/>
+			<TablePane.Row height="-1"/>
+		</rows>
+
+		<TablePane.Row height="-1">
+			<BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'center'}">
+				<Label  text="Cantidad:       "/>
+				<TextInput bxml:id="cantidadText"/>
+			</BoxPane>
+		</TablePane.Row>
+		
+		<TablePane.Row height="-1">
+			<BoxPane>
+				<Label  text=""/>
+			</BoxPane>
+		</TablePane.Row>
+		
+		<TablePane.Row height="-1">
+			<BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'center'}">
+				<Label  text="Medida:           " />
+				<Label  text="" /><ListButton bxml:id="medidaComboBox" />
+			</BoxPane>
+		</TablePane.Row>
+		
+		<TablePane.Row height="-1">
+			<BoxPane>
+				<Label  text=""/>
+			</BoxPane>
+		</TablePane.Row>
+		
+		<TablePane.Row height="-1">
+			<BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'center'}">
+				<Label  text="Tipo: " />
+				<Label  text="" /><ListButton bxml:id="ingredienteComboBox" />
+			</BoxPane>
+		</TablePane.Row>
+		
+		<TablePane.Row height="-1">
+			<BoxPane>
+				<Label  text=""/>
+			</BoxPane>
+		</TablePane.Row>
+		
+		<TablePane.Row height="-1">
+			<BoxPane>
+				<Label  text=""/>
+			</BoxPane>
+		</TablePane.Row>
+		
+		<TablePane.Row height="-1">
+			<BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
+				<PushButton buttonData="Añadir" bxml:id="botonAnadir"/>
+				<PushButton buttonData="Cancelar" bxml:id="botonCancelar"/>
+			</BoxPane>
+		</TablePane.Row>
+
+		<TablePane.Row height="-1">
+			<BoxPane>
+				<Label  text=""/>
+			</BoxPane>
+		</TablePane.Row>
+		
+		<TablePane.Row height="-1">
+			<BoxPane styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+				<Label bxml:id="errorLabel" styles = "{color:'RED'}"/>
+			</BoxPane>
+		</TablePane.Row>
+	 </TablePane>
+	 
+</ui:NuevoIngredienteDialog>

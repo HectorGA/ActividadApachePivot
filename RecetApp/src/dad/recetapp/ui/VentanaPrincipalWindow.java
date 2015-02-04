@@ -10,6 +10,8 @@ import org.apache.pivot.wtk.Label;
 import org.apache.pivot.wtk.Window;
 
 import dad.recetapp.RecetAppApplication;
+import dad.recetapp.services.ServiceException;
+import dad.recetapp.services.ServiceLocator;
 
 
 public class VentanaPrincipalWindow extends Window implements Bindable {
@@ -27,10 +29,18 @@ public class VentanaPrincipalWindow extends Window implements Bindable {
 	@Override
 	public void initialize(Map<String, Object> namespace, URL location, Resources resources) {
 		ventanaPrincipalWindow.setIcon("/dad/recetapp/ui/images/logo.png");
-		//numRecetas.setText(String.valueOf(ServiceLocator.getRecetasService().listarRecetas().size()));
+		setNumReceta();
 	}
 	
 	public void setRecetAppApplication(RecetAppApplication recetAppApplication){
 		this.recetAppApplication = recetAppApplication;
 	}
+	
+	public static void setNumReceta(){
+    	try {
+    		numRecetas.setText(String.valueOf(ServiceLocator.getRecetasService().listarRecetas().size()));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+    }
 }

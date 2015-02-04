@@ -29,9 +29,15 @@ public class SeccionItem {
 	public List<IngredienteItem> getIngredientes() {
 		return ingredientes;
 	}
+	public void setIngredientes(List<IngredienteItem> ingredientes) {
+		this.ingredientes = ingredientes;
+	}
 
 	public List<InstruccionItem> getInstrucciones() {
 		return instrucciones;
+	}
+	public void setInstrucciones(List<InstruccionItem> instrucciones) {
+		this.instrucciones = instrucciones;
 	}
 
 	@Override

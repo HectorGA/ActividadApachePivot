@@ -19,4 +19,16 @@ public class TipoIngredienteItem {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public String toString(){
+		return nombre;
+	}
+	
+	public boolean equals(Object obj){
+		if(obj instanceof TipoIngredienteItem){
+			TipoIngredienteItem tipo = (TipoIngredienteItem) obj;
+			return tipo.getId() == this.id;
+		}
+		return false;
+	}
 }

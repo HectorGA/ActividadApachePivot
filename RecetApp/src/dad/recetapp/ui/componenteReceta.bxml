@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:ComponenteReceta preferredWidth="600"
+	xmlns:bxml="http://pivot.apache.org/bxml" xmlns:content="org.apache.pivot.wtk.content"
+	xmlns:ui="dad.recetapp.ui" xmlns="org.apache.pivot.wtk" styles="{padding:1}">
+
+	<TablePane>
+
+		<columns>
+			<TablePane.Column width="1*" />
+		</columns>
+		<rows>
+			<TablePane.Row height="-1" />
+			<TablePane.Row height="-1" />
+			<TablePane.Row height="1*" />
+		</rows>
+
+		<TablePane.Row height="-1">
+			<FillPane>
+				<BoxPane styles="{horizontalAlignment:'left', verticalAlignment:'center'}">
+					<Label text="Sección: " />
+					<TextInput bxml:id="seccionText" />
+				</BoxPane>
+				<BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
+					<PushButton bxml:id="eliminarPestanaButton">
+						<content:ButtonData icon="/dad/recetapp/ui/images/closeTabIcon.png" />
+					</PushButton>
+				</BoxPane>
+
+
+			</FillPane>
+		</TablePane.Row>
+
+		<TablePane.Row height="-1">
+			<FillPane>
+				<BoxPane
+					styles="{horizontalAlignment:'center', verticalAlignment:'center'}">
+					<Label text="" />
+				</BoxPane>
+			</FillPane>
+		</TablePane.Row>
+
+		<TablePane.Row height="1*">
+			<FillPane>
+
+				<SplitPane bxml:id="splitPane" orientation="horizontal"
+					splitRatio="0.5">
+					<left>
+						<TablePane>
+							<columns>
+								<TablePane.Column width="1*" />
+							</columns>
+							<rows>
+								<TablePane.Row height="1*" />
+								<TablePane.Row height="-1" />
+								<TablePane.Row height="-1" />
+							</rows>
+
+
+							<TablePane.Row height="1*">
+								<FillPane>
+									<Border title="Ingredientes: " styles="{padding:5}">
+									<Border styles="{padding:0}">
+										<ScrollPane horizontalScrollBarPolicy="fill_to_capacity">
+											<TableView bxml:id="tableViewIngredientes" selectMode="MULTI">
+												<columns>
+													<TableView.Column name="cantidad" width="1*"
+														headerData="Cantidad" />
+													<TableView.Column name="medida" width="1*"
+														headerData="Medida" />
+													<TableView.Column name="tipo" width="1*"
+														headerData="Tipo" />
+												</columns>
+											</TableView>
+											<columnHeader>
+												<TableViewHeader tableView="$tableViewIngredientes"
+													sortMode="single_column" />
+											</columnHeader>
+										</ScrollPane>
+									</Border>
+									</Border>
+								</FillPane>
+							</TablePane.Row>
+
+							<TablePane.Row height="-1">
+								<Label text="" />
+							</TablePane.Row>
+
+							<TablePane.Row height="-1">
+								<BoxPane
+									styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
+									<PushButton bxml:id="botonAnadirIngrediente">
+										<content:ButtonData icon="/dad/recetapp/ui/images/add-icon-20x20.png" />
+									</PushButton>
+									<PushButton bxml:id="botonEditarIngrediente">
+										<content:ButtonData icon="/dad/recetapp/ui/images/edit-icon-20x20.png" />
+									</PushButton>
+									<PushButton bxml:id="botonEliminarIngrediente">
+										<content:ButtonData icon="/dad/recetapp/ui/images/delete-icon-20x20.png" />
+									</PushButton>
+								</BoxPane>
+							</TablePane.Row>
+
+						</TablePane>
+					</left>
+					<right>
+						<TablePane>
+							<columns>
+								<TablePane.Column width="1*" />
+							</columns>
+							<rows>
+								<TablePane.Row height="1*" />
+								<TablePane.Row height="-1" />
+								<TablePane.Row height="-1" />
+							</rows>
+
+
+							<TablePane.Row height="1*">
+								<Border title="Instrucciones: " styles="{padding:5}">
+								<Border styles="{padding:0}">
+									<ScrollPane horizontalScrollBarPolicy="fill_to_capacity">
+										<TableView bxml:id="tableViewInstrucciones" selectMode="MULTI">
+											<columns>
+												<TableView.Column name="orden" width="1*"
+													headerData="Orden" />
+												<TableView.Column name="descripcion" width="1*"
+													headerData="Descripción" />
+											</columns>
+										</TableView>
+										<columnHeader>
+											<TableViewHeader tableView="$tableViewInstrucciones"
+												sortMode="single_column" />
+										</columnHeader>
+									</ScrollPane>
+								</Border>
+								</Border>
+							</TablePane.Row>
+
+							<TablePane.Row height="-1">
+								<Label text="" />
+							</TablePane.Row>
+
+							<TablePane.Row height="-1">
+								<BoxPane
+									styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
+									<PushButton bxml:id="botonAnadirInstruccion">
+										<content:ButtonData icon="/dad/recetapp/ui/images/add-icon-20x20.png" />
+									</PushButton>
+									<PushButton bxml:id="botonEditarInstruccion">
+										<content:ButtonData icon="/dad/recetapp/ui/images/edit-icon-20x20.png" />
+									</PushButton>
+									<PushButton bxml:id="botonEliminarInstruccion">
+										<content:ButtonData icon="/dad/recetapp/ui/images/delete-icon-20x20.png" />
+									</PushButton>
+								</BoxPane>
+							</TablePane.Row>
+
+						</TablePane>
+					</right>
+				</SplitPane>
+
+			</FillPane>
+		</TablePane.Row>
+
+	</TablePane>
+
+</ui:ComponenteReceta>

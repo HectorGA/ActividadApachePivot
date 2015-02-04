@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:NuevaReceta
+	title="Nueva receta" maximized="true" xmlns:bxml="http://pivot.apache.org/bxml"
+	xmlns:content="org.apache.pivot.wtk.content" xmlns:ui="dad.recetapp.ui"
+	xmlns="org.apache.pivot.wtk">
+
+	<TablePane styles="{padding:8, horizontalSpacing:6}">
+		<columns>
+			<TablePane.Column width="1*" />
+		</columns>
+		<rows>
+			<TablePane.Row height="-1" />
+			<TablePane.Row height="-1" />
+			<TablePane.Row height="1*" />
+			<TablePane.Row height="-1" />
+			<TablePane.Row height="-1" />
+		</rows>
+
+
+		<TablePane.Row height="-1">
+			<FillPane>
+				<TablePane styles="{padding:8, horizontalSpacing:6}">
+					<columns>
+						<TablePane.Column width="1*" />
+					</columns>
+					<rows>
+						<TablePane.Row height="-1" />
+						<TablePane.Row height="-1" />
+						<TablePane.Row height="-1" />
+						<TablePane.Row height="-1" />
+						<TablePane.Row height="-1" />
+					</rows>
+
+					<TablePane.Row height="-1">
+						<FillPane>
+							<BoxPane
+								styles="{horizontalAlignment:'left', verticalAlignment:'center'}">
+								<Label text="Nombre:  " />
+								<TextInput bxml:id="nombreText" />
+							</BoxPane>
+							<BoxPane
+								styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
+								<Label text="Tiempo total: " />
+								<Spinner preferredWidth="40" selectedIndex="0"
+									bxml:id="spinnerTotalMinutos">
+									<spinnerData>
+										<content:NumericSpinnerData
+											lowerBound="0" increment="1" />
+									</spinnerData>
+								</Spinner>
+								<Label text="M " />
+								<Spinner preferredWidth="40" selectedIndex="0"
+									bxml:id="spinnerTotalSegundos">
+									<spinnerData>
+										<content:NumericSpinnerData
+											lowerBound="0" increment="1" />
+									</spinnerData>
+								</Spinner>
+								<Label text="S " />
+							</BoxPane>
+						</FillPane>
+					</TablePane.Row>
+
+					<TablePane.Row height="-1">
+						<FillPane>
+							<Label text=" " />
+						</FillPane>
+					</TablePane.Row>
+
+					<TablePane.Row height="-1">
+						<FillPane>
+							<BoxPane
+								styles="{horizontalAlignment:'left', verticalAlignment:'center'}">
+								<Label text="Para:       " />
+								<TextInput bxml:id="paraText" />
+								<ListButton listData="['Personas', 'Unidades']"
+									selectedIndex="0" bxml:id="paraComboBox" />
+							</BoxPane>
+							<BoxPane
+								styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
+								<Label text="Tiempo con Thermomix: " />
+								<Spinner preferredWidth="40" selectedIndex="0"
+									bxml:id="spinnerThermomixMinutos">
+									<spinnerData>
+										<content:NumericSpinnerData
+											lowerBound="0" increment="1" />
+									</spinnerData>
+								</Spinner>
+								<Label text="M " />
+								<Spinner preferredWidth="40" selectedIndex="0"
+									bxml:id="spinnerThermomixSegundos">
+									<spinnerData>
+										<content:NumericSpinnerData
+											lowerBound="0" increment="1" />
+									</spinnerData>
+								</Spinner>
+								<Label text="S " />
+							</BoxPane>
+						</FillPane>
+					</TablePane.Row>
+
+					<TablePane.Row height="-1">
+						<FillPane>
+							<Label text=" " />
+						</FillPane>
+					</TablePane.Row>
+
+					<TablePane.Row height="-1">
+						<FillPane>
+							<BoxPane
+								styles="{horizontalAlignment:'left', verticalAlignment:'center'}">
+								<Label text="Categoría " />
+								<ListButton bxml:id="categoriasComboBox" />
+							</BoxPane>
+
+						</FillPane>
+					</TablePane.Row>
+
+				</TablePane>
+			</FillPane>
+		</TablePane.Row>
+
+		<TablePane.Row height="-1">
+			<FillPane>
+				<BoxPane>
+					<Label text=" " />
+				</BoxPane>
+				<BoxPane>
+					<Label text=" " />
+				</BoxPane>
+			</FillPane>
+		</TablePane.Row>
+
+		<TablePane.Row height="1*">
+			<FillPane>
+				<TabPane bxml:id="tabPaneNuevaReceta">
+					<FillPane>
+						<TabPane.tabData>
+							<content:ButtonData icon="/dad/recetapp/ui/images/addTabIcon.png" />
+						</TabPane.tabData>
+					</FillPane>
+				</TabPane>
+			</FillPane>
+		</TablePane.Row>
+
+		<TablePane.Row height="-1">
+			<FillPane>
+				<BoxPane>
+					<Label text=" " />
+				</BoxPane>
+				<BoxPane>
+					<Label text=" " />
+				</BoxPane>
+			</FillPane>
+		</TablePane.Row>
+
+		<TablePane.Row height="-1">
+			<FillPane>
+				<BoxPane styles="{horizontalAlignment:'right', verticalAlignment:'center'}">
+					<PushButton bxml:id="botonCrear"
+						buttonData="Crear" />
+					<PushButton bxml:id="botonCancelar"
+						buttonData="Cancelar" />
+				</BoxPane>
+			</FillPane>
+		</TablePane.Row>
+
+	</TablePane>
+</ui:NuevaReceta>

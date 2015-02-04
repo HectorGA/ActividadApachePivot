@@ -19,4 +19,15 @@ public class CategoriaItem {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+	public String toString(){
+		return descripcion;
+	}
+	public boolean equals(Object obj){
+		if(obj instanceof CategoriaItem){
+			CategoriaItem tipo = (CategoriaItem) obj;
+			return tipo.getId() == this.id;
+		}
+		return false;
+	}
 }
