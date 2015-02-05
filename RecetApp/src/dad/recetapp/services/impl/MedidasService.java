@@ -39,7 +39,7 @@ public class MedidasService implements IMedidasService{
 				throw new ServiceException("Error al recuperar la medida: Debe especificar el identificador");
 			}
 			Connection conn = DataBase.getConnection();
-			PreparedStatement statement = conn.prepareStatement("update medidas set (nombre,abreviatura) values = ?,? where id = ?");
+			PreparedStatement statement = conn.prepareStatement("UPDATE medidas SET nombre = ?, abreviatura = ? WHERE id = ?");
 			statement.setString(1, medida.getNombre());
 			statement.setString(2, medida.getAbreviatura());
 			statement.setLong(3, medida.getId());

@@ -96,13 +96,12 @@ public class CategoriasPane extends TablePane implements Bindable {
 			try {
 				ServiceLocator.getCategoriasService().crearCategoria(nueva);
 			} catch (ServiceException e) {
-				String mensajeRerror = e.getMessage() + "\n\nDetalles: "
-						+ e.getCause().getMessage();
-				System.out.println(mensajeRerror);
+				String mensajeError = e.getMessage() + "\n\nDetalles: " + e.getCause().getMessage();
+				System.out.println(mensajeError);
 			}
 			rellenarVista();
 			descripcionText.setText("");
-		}		
+		}
 	}
 	
 	protected void onBotonEliminarPressed() throws ServiceException {
@@ -111,8 +110,8 @@ public class CategoriasPane extends TablePane implements Bindable {
 		
 		Sequence<?> seleccionados = tableViewCategoria.getSelectedRows();
 		for (int i = 0; i < seleccionados.getLength(); i++) {
-			CategoriaItem variableSeleccionada = (CategoriaItem) seleccionados.get(i);
-			mensaje.append(" - " + variableSeleccionada.getDescripcion() + "\n");
+			CategoriaItem categoria = (CategoriaItem) seleccionados.get(i);
+			mensaje.append(" - " + categoria.getDescripcion() + "\n");
 		}
 		
 		org.apache.pivot.collections.ArrayList<String> siNo = new org.apache.pivot.collections.ArrayList<String>();
@@ -125,11 +124,11 @@ public class CategoriasPane extends TablePane implements Bindable {
 			public void sheetClosed(Sheet sheet) {
 				
 				if (confirmar.getResult() && confirmar.getSelectedOption().equals("Sí")) {
-					for (int i = 0; i < seleccionados.getLength(); i++) {
-						CategoriaItem variableSeleccionada = (CategoriaItem) seleccionados.get(i);
+					for (int i = seleccionados.getLength()-1; i >= 0; i--) {
+						CategoriaItem categoria = (CategoriaItem) seleccionados.get(i);
 						try {
-							ServiceLocator.getCategoriasService().eliminarCategoria(variableSeleccionada.getId());
-							categorias.remove(variableSeleccionada);
+							ServiceLocator.getCategoriasService().eliminarCategoria(categoria.getId());
+							categorias.remove(categoria);
 						} catch (ServiceException e) {
 							Prompt error = new Prompt(MessageType.ERROR, e.getMessage(), null);
 							error.open(getWindow());
