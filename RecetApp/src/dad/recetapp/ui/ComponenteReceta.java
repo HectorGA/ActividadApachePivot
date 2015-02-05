@@ -38,14 +38,12 @@ public class ComponenteReceta extends FillPane implements Bindable {
 	@BXML private Button eliminarPestanaButton;
 	@BXML public TableView tableViewIngredientes;
 	@BXML public TableView tableViewInstrucciones;
-	
 	public org.apache.pivot.collections.List<IngredienteItem> ingredientes;
 	public org.apache.pivot.collections.List<InstruccionItem> instrucciones;
-	public Window parent;
+	public Window parentWindow;
 
 	@Override
 	public void initialize(Map<String, Object> namespace, URL location,Resources resources) {
-
 		ingredientes = new org.apache.pivot.collections.ArrayList<IngredienteItem>();
 		instrucciones = new org.apache.pivot.collections.ArrayList<InstruccionItem>();
 
@@ -54,16 +52,16 @@ public class ComponenteReceta extends FillPane implements Bindable {
 			@Override
 			public boolean keyTyped(Component arg0, char arg1) {
 				
-				if (parent instanceof NuevaReceta){
+				if (parentWindow instanceof NuevaReceta){
 					try {
-						((NuevaReceta) parent).cambiarTituloPestana(seccionText.getText());
-						((NuevaReceta) parent).tabPaneNuevaReceta.repaint();
+						((NuevaReceta) parentWindow).cambiarTituloPestana(seccionText.getText());
+						((NuevaReceta) parentWindow).tabPaneNuevaReceta.repaint();
 					} catch (NullPointerException e) {
 					}
 				} else {
 					try {
-						((EditarReceta) parent).cambiarTituloPestana(seccionText.getText());
-						((EditarReceta) parent).tabPaneEditarReceta.repaint();
+						((EditarReceta) parentWindow).cambiarTituloPestana(seccionText.getText());
+						((EditarReceta) parentWindow).tabPaneEditarReceta.repaint();
 					} catch (NullPointerException e) {
 					}
 				}
@@ -92,34 +90,34 @@ public class ComponenteReceta extends FillPane implements Bindable {
 				anadirIngrediente();
 			}
 		});
-
-		botonAnadirInstruccion.getButtonPressListeners().add(new ButtonPressListener() {
-			@Override
-			public void buttonPressed(Button button) {
-				anadirInstruccion();
-			}
-		});
-
+		
 		botonEditarIngrediente.getButtonPressListeners().add(new ButtonPressListener() {
 			@Override
 			public void buttonPressed(Button button) {
 				editarIngrediente();
 			}
 		});
-
-		botonEditarInstruccion.getButtonPressListeners().add(new ButtonPressListener() {
-			@Override
-			public void buttonPressed(Button button) {
-				editarInstruccion();
-			}
-		});
-
+		
 		botonEliminarIngrediente.getButtonPressListeners().add(new ButtonPressListener() {
 			@Override
 			public void buttonPressed(Button button) {
 				eliminarIngrediente();
 			}
 		});
+
+		botonAnadirInstruccion.getButtonPressListeners().add(new ButtonPressListener() {
+			@Override
+			public void buttonPressed(Button button) {
+				anadirInstruccion();
+			}
+		});		
+
+		botonEditarInstruccion.getButtonPressListeners().add(new ButtonPressListener() {
+			@Override
+			public void buttonPressed(Button button) {
+				editarInstruccion();
+			}
+		});		
 
 		botonEliminarInstruccion.getButtonPressListeners().add(new ButtonPressListener() {
 			@Override
@@ -140,7 +138,7 @@ public class ComponenteReceta extends FillPane implements Bindable {
 		} else {
 			EditarIngredienteDialog editarIngredienteDialog = null;
 			try {
-				editarIngredienteDialog = (EditarIngredienteDialog) RecetAppApplication.loadWindow("dad/recetapp/ui/EditarIngredienteDialog.bxml");
+				editarIngredienteDialog = (EditarIngredienteDialog) RecetAppApplication.loadWindow("dad/recetapp/ui/editarIngredienteDialog.bxml");
 				IngredienteItem ingredienteSeleccionado = null;
 
 				for (int i = 0; i < seleccionados.getLength(); i++) {
@@ -177,7 +175,7 @@ public class ComponenteReceta extends FillPane implements Bindable {
 		} else {
 			EditarInstruccionDialog editarInstruccionDialog = null;
 			try {
-				editarInstruccionDialog = (EditarInstruccionDialog) RecetAppApplication.loadWindow("dad/recetapp/ui/EditarInstruccionDialog.bxml");
+				editarInstruccionDialog = (EditarInstruccionDialog) RecetAppApplication.loadWindow("dad/recetapp/ui/editarInstruccionDialog.bxml");
 				InstruccionItem instruccionSeleccionada = null;
 
 				for (int i = 0; i < seleccionados.getLength(); i++) {
@@ -207,7 +205,7 @@ public class ComponenteReceta extends FillPane implements Bindable {
 	private void anadirInstruccion() {
 		NuevaInstruccionDialog nuevaInstruccionDialog = null;
 		try {
-			nuevaInstruccionDialog = (NuevaInstruccionDialog) RecetAppApplication.loadWindow("dad/recetapp/ui/NuevaInstruccionDialog.bxml");
+			nuevaInstruccionDialog = (NuevaInstruccionDialog) RecetAppApplication.loadWindow("dad/recetapp/ui/nuevaInstruccionDialog.bxml");
 			nuevaInstruccionDialog.open(this.getWindow(), new DialogCloseListener() {
 				@Override
 				public void dialogClosed(Dialog d, boolean arg1) {
@@ -228,7 +226,7 @@ public class ComponenteReceta extends FillPane implements Bindable {
 	private void anadirIngrediente() {
 		NuevoIngredienteDialog nuevoIngredienteDialog = null;
 		try {
-			nuevoIngredienteDialog = (NuevoIngredienteDialog) RecetAppApplication.loadWindow("dad/recetapp/ui/NuevoIngredienteDialog.bxml");		
+			nuevoIngredienteDialog = (NuevoIngredienteDialog) RecetAppApplication.loadWindow("dad/recetapp/ui/nuevoIngredienteDialog.bxml");		
 			nuevoIngredienteDialog.open(this.getWindow(), new DialogCloseListener() {
 				@Override
 				public void dialogClosed(Dialog d, boolean arg1) {
@@ -305,7 +303,7 @@ public class ComponenteReceta extends FillPane implements Bindable {
 	}
 
 	public void setParent(Window parent){
-		this.parent = parent;
+		this.parentWindow = parent;
 	}
 	
 	public void setSeccionText(String texto){

@@ -14,21 +14,15 @@ import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 
 
-public class VentanaPrincipalWindow extends Window implements Bindable {
-	
+public class MainWindow extends Window implements Bindable {
 	@SuppressWarnings("unused")
 	private RecetAppApplication recetAppApplication;
-	
-	@BXML
-	private Window ventanaPrincipalWindow;
-	@BXML
-	private CategoriasPane categoriasPane;
-	@BXML
-    private static Label numRecetas;
+	@BXML private Window mainWindow;
+	@BXML private static Label numRecetas;
 	
 	@Override
 	public void initialize(Map<String, Object> namespace, URL location, Resources resources) {
-		ventanaPrincipalWindow.setIcon("/dad/recetapp/ui/images/logo.png");
+		mainWindow.setIcon("/dad/recetapp/ui/images/logo.png");
 		setNumReceta();
 	}
 	

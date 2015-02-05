@@ -41,7 +41,6 @@ public class EditarReceta extends Window implements Bindable {
 	@BXML private TextInput nombreText, paraText;
 	@BXML private Spinner spinnerTotalMinutos, spinnerTotalSegundos, spinnerThermomixMinutos, spinnerThermomixSegundos;
 	@BXML private static ListButton categoriasComboBox, paraComboBox;
-	
 	public org.apache.pivot.collections.List<RecetaListItem> recetas;
 	private static List<ComponenteReceta> componentes;
 	private static org.apache.pivot.collections.List<CategoriaItem> categorias;
@@ -52,9 +51,8 @@ public class EditarReceta extends Window implements Bindable {
 
 	@Override
 	public void initialize(Map<String, Object> namespace, URL location,Resources resources) {
-
 		componentes = new ArrayList<ComponenteReceta>();
-
+		
 		try {
 			cargarComboCategorias();
 		} catch (ServiceException e) {
@@ -62,7 +60,6 @@ public class EditarReceta extends Window implements Bindable {
 		}
 
 		categoriasComboBox.setSelectedIndex(0);
-
 		tabPaneEditarReceta.getComponentMouseButtonListeners().add(new ComponentMouseButtonListener.Adapter() {
 			@Override
 			public boolean mouseClick(Component arg0,org.apache.pivot.wtk.Mouse.Button arg1, int arg2,int arg3, int arg4) {
@@ -152,7 +149,6 @@ public class EditarReceta extends Window implements Bindable {
 
 	@SuppressWarnings({ "static-access", "unchecked" })
 	protected void crearPanelesExistentes(String texto, List<IngredienteItem> ingredientes, List<InstruccionItem> instrucciones) {
-
 		try {
 			URL bxmlUrl = getClass().getResource("ComponenteReceta.bxml");
 			BXMLSerializer serializer = new BXMLSerializer();

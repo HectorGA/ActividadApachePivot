@@ -28,19 +28,15 @@ import dad.recetapp.services.items.CategoriaItem;
 
 public class CategoriasPane extends TablePane implements Bindable {
 
-	/* esta lista es una lista observable (cuando modificamos su contenido los observadores,
-	*como el TableView, se enteran sin necesidad de avisarles)*/
-	private org.apache.pivot.collections.List<CategoriaItem> categorias;
-	private String textoSinModificar;
-	// Componentes para gestionar la pestaña Categoria.
 	@BXML private TableView tableViewCategoria;
 	@BXML private PushButton botonAnadir;
 	@BXML private PushButton botonEliminar;
 	@BXML private TextInput descripcionText;
+	private org.apache.pivot.collections.List<CategoriaItem> categorias;
+	private String textoSinModificar;
 
 	@Override
 	public void initialize(Map<String, Object> namespace, URL location, Resources resources) {
-		
 		categorias = new org.apache.pivot.collections.ArrayList<CategoriaItem>();
 		rellenarVista();
 		tableViewCategoria.setTableData(categorias);
@@ -48,7 +44,7 @@ public class CategoriasPane extends TablePane implements Bindable {
 			@Override
 			public void selectedRangesChanged(TableView arg0, Sequence<Span> arg1) {
 				textoSinModificar = categorias.get(arg0.getSelectedIndex()).getDescripcion();
-				System.out.println("Seleccionado " + arg0.getSelectedIndex());
+				//System.out.println("Seleccionado " + arg0.getSelectedIndex());
 			}
 		});
 		tableViewCategoria.getTableViewRowListeners().add(new TableViewRowListener(){
@@ -56,7 +52,6 @@ public class CategoriasPane extends TablePane implements Bindable {
 			public void rowInserted(TableView arg0, int arg1) {}
 			@Override
 			public void rowUpdated(TableView tableViewCategoria, int index) {
-				// CUANDO MODIFICAMOS UNA FILA.
 				if(categorias.get(index).getDescripcion().equals("")){
 					System.out.print("Celda vacia, recuperamos el dato ");
 					categorias.get(index).setDescripcion(textoSinModificar);
@@ -76,8 +71,7 @@ public class CategoriasPane extends TablePane implements Bindable {
 			@Override
 			public void rowsSorted(TableView arg0) {}
 		});
-		
-		//******** BOTONES *********//
+
 		botonAnadir.getButtonPressListeners().add(new ButtonPressListener() {
 			public void buttonPressed(Button button) {
 				onBotonAnadirPressed();
@@ -95,16 +89,10 @@ public class CategoriasPane extends TablePane implements Bindable {
 		});
 	}
 
-	/**
-	 * Este metodo crea un objeto CategoriaItem y lo agrega a la lista
-	 * del tableview, luego invoca el servicio crearCategoria para
-	 * crear la nueva categoría en la base de datos.
-	 */
 	private void onBotonAnadirPressed() {
 		if(!descripcionText.getText().equals("")){
 			CategoriaItem nueva = new CategoriaItem();
 			nueva.setDescripcion(descripcionText.getText());
-			//	Creamos el objeto en la base de datos.
 			try {
 				ServiceLocator.getCategoriasService().crearCategoria(nueva);
 			} catch (ServiceException e) {
@@ -117,14 +105,7 @@ public class CategoriasPane extends TablePane implements Bindable {
 		}		
 	}
 	
-	/**
-	 * Esta clase esta vinculada al botonEliminar del xml al pulsar
-	 * borra el objeto de la lista y hace un delete en la base de datos
-	 * con la descripción de la categoria a borrar.
-	 * @throws ServiceException 
-	 */
 	protected void onBotonEliminarPressed() throws ServiceException {
-
 		StringBuffer mensaje = new StringBuffer();
 		mensaje.append("¿Desea eliminar las siguientes Categorias?\n\n");
 		
@@ -148,25 +129,19 @@ public class CategoriasPane extends TablePane implements Bindable {
 						CategoriaItem variableSeleccionada = (CategoriaItem) seleccionados.get(i);
 						try {
 							ServiceLocator.getCategoriasService().eliminarCategoria(variableSeleccionada.getId());
+							categorias.remove(variableSeleccionada);
 						} catch (ServiceException e) {
-							e.printStackTrace();
-						}
-						categorias.remove(variableSeleccionada);
+							Prompt error = new Prompt(MessageType.ERROR, e.getMessage(), null);
+							error.open(getWindow());
+							//e.printStackTrace();
+						} catch(IndexOutOfBoundsException e) { }
 					}
 				}
 			}
 		});
 	}
 	
-	/**
-	 * Metodo que rellena la vista del TableView
-	 * @param traerCategorias esta variable trae una colección de objetos a una lista de Java.util
-	 * que luego recorremos para rellenar la lista de apache pivot.
-	 * @param categorias es la vista en la que se fija el tableView para colocar sus datos.
-	 */
 	private void rellenarVista() {
-		//******* RELLENAMOS LA TABLA ********//
-		// Hacemos un listar Categorias para obtener todas las categorias
 		java.util.List<CategoriaItem> traerCategorias = new ArrayList<CategoriaItem>();
 		try {
 			traerCategorias = ServiceLocator.getCategoriasService().listarCategoria();

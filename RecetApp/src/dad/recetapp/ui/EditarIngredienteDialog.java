@@ -9,8 +9,9 @@ import org.apache.pivot.util.Resources;
 import org.apache.pivot.wtk.Button;
 import org.apache.pivot.wtk.ButtonPressListener;
 import org.apache.pivot.wtk.Dialog;
-import org.apache.pivot.wtk.Label;
 import org.apache.pivot.wtk.ListButton;
+import org.apache.pivot.wtk.MessageType;
+import org.apache.pivot.wtk.Prompt;
 import org.apache.pivot.wtk.TextInput;
 
 import dad.recetapp.services.ServiceException;
@@ -20,30 +21,17 @@ import dad.recetapp.services.items.MedidaItem;
 import dad.recetapp.services.items.TipoIngredienteItem;
 
 public class EditarIngredienteDialog extends Dialog implements Bindable {
-
+	@BXML private EditarIngredienteDialog editarIngredienteDialog;
+	@BXML private Button editarIngredienteDialogButton, cancelarIngredienteDialogButton;
+	@BXML private static ListButton medidaComboBox, ingredienteComboBox;
+	@BXML private TextInput cantidadText;
 	private Boolean aceptar = false;
-	
-	@BXML
-	private EditarIngredienteDialog editarIngredienteDialog;
-	@BXML
-	private Button editarIngredienteDialogButton,
-			cancelarIngredienteDialogButton;
-	@BXML
-	private static ListButton medidasListButton, tipoIngredienteListButton;
-	@BXML
-	private TextInput cantidadText;
-	@BXML
-	private Label errorLabel;
-
-	private static org.apache.pivot.collections.List<MedidaItem> medidasBD;
-	private static org.apache.pivot.collections.List<TipoIngredienteItem> tiposIngredientesBD;
-
+	private static org.apache.pivot.collections.List<MedidaItem> medidas;
+	private static org.apache.pivot.collections.List<TipoIngredienteItem> tiposIngredientes;
 	private IngredienteItem ingrediente;
 
 	@Override
-	public void initialize(Map<String, Object> namespace, URL location,
-			Resources resources) {
-
+	public void initialize(Map<String, Object> namespace, URL location, Resources resources) {
 		ingrediente = new IngredienteItem();
 
 		try {
@@ -52,33 +40,23 @@ public class EditarIngredienteDialog extends Dialog implements Bindable {
 			e.printStackTrace();
 		}
 
-		cancelarIngredienteDialogButton.getButtonPressListeners().add(
-				new ButtonPressListener() {
+		cancelarIngredienteDialogButton.getButtonPressListeners().add(new ButtonPressListener() {
 					@Override
 					public void buttonPressed(Button arg0) {
 						editarIngredienteDialog.close();
 					}
 				});
 
-		editarIngredienteDialogButton.getButtonPressListeners().add(
-				new ButtonPressListener() {
+		editarIngredienteDialogButton.getButtonPressListeners().add(new ButtonPressListener() {
 					@Override
 					public void buttonPressed(Button arg0) {
-						if (cantidadText.getText().equals("")
-								|| medidasListButton.getSelectedItem()
-										.toString()
-										.equals("<Seleccione la medida>")
-								|| tipoIngredienteListButton
-										.getSelectedItem()
-										.toString()
-										.equals("<Seleccione el tipo de instruccion>")) {
-							errorLabel
-									.setText("Debe rellenar todos los campos");
+						if (cantidadText.getText().equals("") || medidaComboBox.getSelectedItem().toString().equals("<Seleccione la medida>") || ingredienteComboBox.getSelectedItem().toString().equals("<Seleccione el tipo de instruccion>")) {
+							Prompt error = new Prompt(MessageType.ERROR, "Faltan algunos campos por rellenar", null);
+							error.open(getWindow());
 						} else {
 							ingrediente.setCantidad(Integer.valueOf(cantidadText.getText()));
-							ingrediente.setMedida((MedidaItem) medidasListButton.getSelectedItem());
-							ingrediente.setTipo((TipoIngredienteItem) tipoIngredienteListButton.getSelectedItem());
-
+							ingrediente.setMedida((MedidaItem) medidaComboBox.getSelectedItem());
+							ingrediente.setTipo((TipoIngredienteItem) ingredienteComboBox.getSelectedItem());
 							aceptar = true;
 							close();
 						}
@@ -88,13 +66,10 @@ public class EditarIngredienteDialog extends Dialog implements Bindable {
 
 	@SuppressWarnings("unchecked")
 	public static void cargarCombos() throws ServiceException {
-		medidasBD = convertirList(ServiceLocator.getMedidasService()
-				.listarMedidas());
-		medidasListButton.setListData(medidasBD);
-		// ----------------------------------------------------
-		tiposIngredientesBD = convertirList(ServiceLocator
-				.getTiposIngredientesService().listarTipoIngrediente());
-		tipoIngredienteListButton.setListData(tiposIngredientesBD);
+		medidas = convertirList(ServiceLocator.getMedidasService().listarMedidas());
+		medidaComboBox.setListData(medidas);
+		tiposIngredientes = convertirList(ServiceLocator.getTiposIngredientesService().listarTipoIngrediente());
+		ingredienteComboBox.setListData(tiposIngredientes);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -118,8 +93,7 @@ public class EditarIngredienteDialog extends Dialog implements Bindable {
 	public void setIngrediente(IngredienteItem ingrediente){
 		this.ingrediente = ingrediente;
 		cantidadText.setText(String.valueOf(this.ingrediente.getCantidad()));
-		medidasListButton.setSelectedIndex(0);
-		tipoIngredienteListButton.setSelectedIndex(0);
+		medidaComboBox.setSelectedIndex(0);
+		ingredienteComboBox.setSelectedIndex(0);
 	}
-
 }

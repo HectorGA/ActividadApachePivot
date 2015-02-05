@@ -21,51 +21,48 @@ import org.apache.pivot.wtk.Mouse.Button;
 import dad.recetapp.RecetAppApplication;
 
 public class Inicio extends Window implements Bindable{
-
-	@BXML
-	private Inicio inicio;
-	@BXML
-	private ImageView imageView;
+	@BXML private ImageView imageView;
 	private Timer timer;
 	
 	@Override
 	public void initialize(Map<String, Object> namespace, URL location, Resources resources) {
-
-		imageView.getComponentMouseButtonListeners().add(new ComponentMouseButtonListener() {
-			
-			@Override
-			public boolean mouseUp(Component arg0, Button arg1, int arg2, int arg3) {return false;}
-			@Override
-			public boolean mouseDown(Component arg0, Button arg1, int arg2, int arg3) {return false;}
-			
-			@Override
-			public boolean mouseClick(Component arg0, Button arg1, int arg2, int arg3,int arg4) {
-				initFrame();
-				return false;
-			}
-		});
-		
 		timer = new Timer(4000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				initFrame();				
+				iniciarPrograma();				
 			}
 		});
-		
 		timer.start();
+		
+		imageView.getComponentMouseButtonListeners().add(new ComponentMouseButtonListener() {
+					@Override
+					public boolean mouseUp(Component arg0, Button arg1, int arg2, int arg3) {
+						return false;
+					}
+
+					@Override
+					public boolean mouseDown(Component arg0, Button arg1, int arg2, int arg3) {
+						return false;
+					}
+
+					@Override
+					public boolean mouseClick(Component arg0, Button arg1, int arg2, int arg3, int arg4) {
+						iniciarPrograma();
+						return false;
+					}
+				});
 	}
 
-	private void initFrame(){
+	private void iniciarPrograma(){
 		timer.stop();
-		VentanaPrincipalWindow ventanaPrincipalWindow = null;
 		try {
-			ventanaPrincipalWindow = (VentanaPrincipalWindow) RecetAppApplication.loadWindow("dad/recetapp/ui/VentanaPrincipalWindow.bxml");
+			MainWindow mainWindow = (MainWindow) RecetAppApplication.loadWindow("dad/recetapp/ui/mainWindow.bxml");
+			mainWindow.open(this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (SerializationException e) {
 			e.printStackTrace();
 		}
-		ventanaPrincipalWindow.open(this);
+		
 	}
-
 }

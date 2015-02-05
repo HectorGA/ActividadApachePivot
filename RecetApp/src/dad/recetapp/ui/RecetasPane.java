@@ -43,7 +43,6 @@ public class RecetasPane extends FillPane implements Bindable {
 	@BXML private Button botonEditar;
 	@BXML private TextInput nombreText;
 	@BXML private Spinner spinnerMinutos, spinnerSegundos;
-	
 	public static org.apache.pivot.collections.List<RecetaListItem> recetas;
 	private org.apache.pivot.collections.List<RecetaListItem> filtroRecetas;
 	private static org.apache.pivot.collections.List<CategoriaItem> categorias;
@@ -51,9 +50,7 @@ public class RecetasPane extends FillPane implements Bindable {
 	@SuppressWarnings({ "unchecked" })
 	@Override
 	public void initialize(Map<String, Object> namespace, URL location,Resources resources) {
-
 		recetas = new org.apache.pivot.collections.ArrayList<RecetaListItem>();
-		
 		filtrarDatos();
 
 		try {
@@ -100,7 +97,7 @@ public class RecetasPane extends FillPane implements Bindable {
 			nuevaReceta = (NuevaReceta) RecetAppApplication.loadWindow("dad/recetapp/ui/nuevaReceta.bxml");
 			nuevaReceta.setVariables(recetas);
 			nuevaReceta.open(getDisplay());
-			VentanaPrincipalWindow.setNumReceta();
+			MainWindow.setNumReceta();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (SerializationException e) {
@@ -158,7 +155,7 @@ public class RecetasPane extends FillPane implements Bindable {
 								RecetaListItem recetaSeleccionada = (RecetaListItem) seleccionados.get(i);
 								recetas.remove(recetaSeleccionada);
 								ServiceLocator.getRecetasService().eliminarReceta(recetaSeleccionada.getId());
-								VentanaPrincipalWindow.setNumReceta();
+								MainWindow.setNumReceta();
 							} catch (ServiceException e) {
 								e.printStackTrace();
 							}
@@ -191,12 +188,8 @@ public class RecetasPane extends FillPane implements Bindable {
 		return listaApache;
 	}
 
-	
-
 	protected void filtrarDatos() {
-		spinnerSegundos.getSpinnerSelectionListeners().add(
-				new SpinnerSelectionListener() {
-
+		spinnerSegundos.getSpinnerSelectionListeners().add(new SpinnerSelectionListener() {
 					@Override
 					public void selectedItemChanged(Spinner arg0, Object arg1) {
 						filtroTabla();
@@ -208,8 +201,7 @@ public class RecetasPane extends FillPane implements Bindable {
 					}
 				});
 
-		spinnerMinutos.getSpinnerSelectionListeners().add(
-				new SpinnerSelectionListener() {
+		spinnerMinutos.getSpinnerSelectionListeners().add(new SpinnerSelectionListener() {
 					@Override
 					public void selectedItemChanged(Spinner arg0, Object arg1) {
 						filtroTabla();
@@ -221,8 +213,7 @@ public class RecetasPane extends FillPane implements Bindable {
 					}
 				});
 
-		nombreText.getComponentKeyListeners().add(
-				new ComponentKeyListener.Adapter() {
+		nombreText.getComponentKeyListeners().add(new ComponentKeyListener.Adapter() {
 					@Override
 					public boolean keyTyped(Component arg0, char arg1) {
 						try {
@@ -233,8 +224,7 @@ public class RecetasPane extends FillPane implements Bindable {
 					}
 				});
 
-		categoriasComboBox.getListButtonSelectionListeners().add(
-				new ListButtonSelectionListener.Adapter() {
+		categoriasComboBox.getListButtonSelectionListeners().add(new ListButtonSelectionListener.Adapter() {
 					@Override
 					public void selectedItemChanged(ListButton listButton,
 							Object previousSelectedItem) {
@@ -245,7 +235,6 @@ public class RecetasPane extends FillPane implements Bindable {
 
 	@SuppressWarnings("unchecked")
 	protected void filtroTabla() {
-
 		CategoriaItem categoriaItem = (CategoriaItem) categoriasComboBox.getSelectedItem();
 		Integer tiempo = (spinnerMinutos.getSelectedIndex() * 60) + spinnerSegundos.getSelectedIndex();
 		if (tiempo == 0) {
@@ -265,5 +254,4 @@ public class RecetasPane extends FillPane implements Bindable {
 	protected void recargarTabla(){
 		tableViewRecetas.setTableData(recetas);
 	}
-
 }

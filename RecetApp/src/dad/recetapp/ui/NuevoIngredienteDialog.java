@@ -9,8 +9,9 @@ import org.apache.pivot.util.Resources;
 import org.apache.pivot.wtk.Button;
 import org.apache.pivot.wtk.ButtonPressListener;
 import org.apache.pivot.wtk.Dialog;
-import org.apache.pivot.wtk.Label;
 import org.apache.pivot.wtk.ListButton;
+import org.apache.pivot.wtk.MessageType;
+import org.apache.pivot.wtk.Prompt;
 import org.apache.pivot.wtk.TextInput;
 
 import dad.recetapp.services.ServiceException;
@@ -20,23 +21,17 @@ import dad.recetapp.services.items.MedidaItem;
 import dad.recetapp.services.items.TipoIngredienteItem;
 
 public class NuevoIngredienteDialog extends Dialog implements Bindable {
-	
-	private Boolean aceptar = false;
-
 	@BXML private NuevoIngredienteDialog nuevoIngredienteDialog;
 	@BXML private Button botonAnadir, botonCancelar;
 	@BXML private static ListButton medidaComboBox, ingredienteComboBox;
 	@BXML private TextInput cantidadText;
-	@BXML private Label errorLabel;
-
 	public IngredienteItem ingrediente;
-	
+	private Boolean aceptar = false;
 	private static org.apache.pivot.collections.List<MedidaItem> medidas;
 	private static org.apache.pivot.collections.List<TipoIngredienteItem> ingredientes;
 
 	@Override
 	public void initialize(Map<String, Object> namespace, URL location, Resources resources) {
-		
 		ingrediente = new IngredienteItem();
 		
 		try {
@@ -57,8 +52,9 @@ public class NuevoIngredienteDialog extends Dialog implements Bindable {
 				new ButtonPressListener() {
 					@Override
 					public void buttonPressed(Button arg0) {
-						if (cantidadText.getText().equals("")|| medidaComboBox.getSelectedItem().toString().equals("Seleccione la medida")|| ingredienteComboBox.getSelectedItem().toString().equals("Seleccione el tipo de instruccion")) {
-							errorLabel.setText("Debe rellenar todos los campos");
+						if(cantidadText.getText().equals("")|| medidaComboBox.getSelectedItem().toString().equals("Seleccione la medida")|| ingredienteComboBox.getSelectedItem().toString().equals("Seleccione el tipo de instruccion")) {
+							Prompt error = new Prompt(MessageType.ERROR, "Faltan algunos campos por rellenar", null);
+							error.open(getWindow());
 						} else {
 							ingrediente.setCantidad(Integer.valueOf(cantidadText.getText()));
 							ingrediente.setMedida((MedidaItem) medidaComboBox.getSelectedItem());
@@ -73,14 +69,13 @@ public class NuevoIngredienteDialog extends Dialog implements Bindable {
 
 	@SuppressWarnings("unchecked")
 	public static void cargarCombos() throws ServiceException {
-		MedidaItem medidaTitle = new MedidaItem();
-		medidaTitle.setId(null);
-		medidaTitle.setNombre("Seleccione la medida");
+		MedidaItem medidaItem = new MedidaItem();
+		medidaItem.setId(null);
+		medidaItem.setNombre("Seleccione la medida");
 		medidas = convertirList(ServiceLocator.getMedidasService().listarMedidas());
-		medidas.insert(medidaTitle, 0);
+		medidas.insert(medidaItem, 0);
 		medidaComboBox.setListData(medidas);
-		medidaComboBox.setSelectedItem(medidaTitle);
-		// ----------------------------------------------------
+		medidaComboBox.setSelectedItem(medidaItem);
 		TipoIngredienteItem tipoIngredienteTitle = new TipoIngredienteItem();
 		tipoIngredienteTitle.setId(null);
 		tipoIngredienteTitle.setNombre("Seleccione el tipo de ingrediente");

@@ -39,7 +39,6 @@ public class NuevaReceta extends Window implements Bindable {
 	@BXML private TextInput nombreText, paraText;
 	@BXML private Spinner spinnerTotalMinutos, spinnerTotalSegundos, spinnerThermomixMinutos, spinnerThermomixSegundos;
 	@BXML private static ListButton paraComboBox, categoriasComboBox;
-	
 	public org.apache.pivot.collections.List<RecetaListItem> recetas;
 	private static org.apache.pivot.collections.List<CategoriaItem> categorias;
 	private static List<ComponenteReceta> componentes;
@@ -48,7 +47,7 @@ public class NuevaReceta extends Window implements Bindable {
 	public void initialize(Map<String, Object> namespace, URL location,Resources resources) {
 		componentes = new ArrayList<ComponenteReceta>();
 		crearNuevoPanelComponente();
-
+		
 		try {
 			cargarComboCategorias();
 
@@ -105,7 +104,7 @@ public class NuevaReceta extends Window implements Bindable {
 			}
 			try {
 				ServiceLocator.getRecetasService().crearReceta(recetaItem);
-				VentanaPrincipalWindow.setNumReceta();
+				MainWindow.setNumReceta();
 			} catch (ServiceException e) {
 				Prompt error = new Prompt("Error al crear la receta.");
 				error.open(this.getWindow(), new SheetCloseListener() {
